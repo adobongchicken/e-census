@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+th,
+td,
+tr {
+    border: 1px solid gray;
+    font-size: 16px;
+}
+
+.input-box {
+    width: 100%;
+    border-color: #1e3a8a;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    outline: none;
+}
+
+.primary-button {
+    background-color: #1e3a8a;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.normal-button {
+    background-color: white;
+    color: black;
+    padding: 9px;
+    font-size: 0.75rem;
+    border-radius: 0.125rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.search-box {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    outline: none;
+}
+
+.article {
+    display: flex;
+    align-items: center;
+}
+.label {
+    width: 13rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+@layer base {
+
+    html,
+    body {
+        font-family: "Inter", sans-serif;
+    }
+
+    tr,
+    td,
+    th {
+        @apply border border-gray-500 text-sm p-2;
+    }
+}
+@layer components {
+    .input-box {
+        @apply w-full border-blue-800 border-2 rounded-md p-2 text-xs outline-none;
+    }
+
+    .primary-button {
+        @apply bg-blue-800 text-white text-xs p-2 font-medium rounded-md outline-none cursor-pointer;
+    }
+
+    .normal-button {
+        @apply bg-white text-black p-[9px] text-xs rounded-sm outline-none cursor-pointer;
+    }
+
+    .search-box {
+        @apply w-full bg-white shadow-lg rounded-md p-2 text-xs outline-none;
+    }
+
+    .label {
+        @apply w-52 text-sm font-medium;
+    }
+
+    .article {
+        @apply flex items-center;
+    }
+
+    .article-background {
+        position: relative;
+        overflow-y: auto;
+    }
+
+    .article-background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/public/assets/logo_2.png');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.5;
+        /* Adjust opacity here */
+        z-index: -1;
+        /* Ensure the pseudo-element is behind the content */
+    }
+
+    .invitation-background {
+        position: relative;
+        overflow-y: auto;
+    }
+
+    .invitation-background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/public/assets/baranggay_image.png');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.5;
+        /* Adjust opacity here */
+        z-index: -1;
+        /* Ensure the pseudo-element is behind the content */
+    }
+
+}
