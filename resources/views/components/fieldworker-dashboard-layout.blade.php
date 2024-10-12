@@ -14,19 +14,23 @@
     <title>{{ $title }}</title>
 </head>
 
-<body class="h-full flex items-start">
-    <nav class="flex items-start flex-col border-2 border-red-700 w-80 rounded-md h-full py-5">
-        <div class="flex items-center gap-x-4 px-4 mb-4">
+<body class="h-full flex">
+    <!-- Sidebar -->
+    <!-- Sidebar -->
+    <nav id="sidebar"
+        class="bg-white border-r border-red-300 h-screen w-30 transition-transform duration-300 ease-in-out"
+        :class="{ '-translate-x-full': !sidebarOpen }">
+        <div class="flex items-center gap-x-2 px-4 mb-4"> <!-- Changed gap-x-4 to gap-x-2 -->
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-16">
             <h1 class="font-bold text-xl">Dashboard</h1>
         </div>
-        <article class="flex flex-col w-full">
+        
+        <article class="flex flex-col w-full overflow-y-auto">
             <x-nav-link href="/fieldworker/register-residents" :active="request()->is('fieldworker/register-residents')">Register Residents</x-nav-link>
             <x-nav-link href="/fieldworker/events-programs" :active="request()->is('fieldworker/events-programs')">Events and Program</x-nav-link>
         </article>
 
-        <article id="logout-button"
-            class="w-full mt-8 p-3 border-2 border-gray-600 flex items-center justify-between cursor-pointer">
+        <article id="logout-button" class="w-full mt-8 p-3 border-2 border-gray-600 flex items-center justify-between cursor-pointer">
             <h1 class="flex items-center justify-center gap-x-3 text-sm">
                 <img src="{{ asset('assets/user.png') }}" alt="Username" class="w-4">
                 @if (auth()->user())
@@ -34,7 +38,6 @@
                 @endif
             </h1>
             <img src="{{ asset('assets/angle-small-down.png') }}" alt="Drop Down Logo" class="w-4">
-
         </article>
         <article class="self-end hidden" id="logout-section">
             <form action="/auth/logout" method="POST">
@@ -43,16 +46,36 @@
             </form>
         </article>
     </nav>
-    <main class="w-full">
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 overflow-y-auto">
+        <button id="hamburger" class="p-2 text-gray-600 lg:hidden">
+            <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+        </button>
         {{ $slot }}
     </main>
-    <script>
-        const logoutButton = document.getElementById('logout-button')
-        const logoutSection = document.getElementById('logout-section')
 
+    <script>
+        const logoutButton = document.getElementById('logout-button');
+        const logoutSection = document.getElementById('logout-section');
+        const toggleButton = document.getElementById('toggle-button');
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerButton = document.getElementById('hamburger');
+
+        // Toggle logout section visibility
         logoutButton.addEventListener('click', () => {
-            logoutSection.classList.toggle('hidden')
-        })
+            logoutSection.classList.toggle('hidden');
+        });
+
+        // Toggle sidebar visibility on close button click
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        // Show sidebar when hamburger button is clicked
+        hamburgerButton.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full');
+        });
     </script>
 </body>
 
