@@ -1,9 +1,8 @@
 <x-dashboard-layout>
     <x-slot:title>User Dashboard</x-slot:title>
-    <header class="w-full">
-        <article class="w-full bg-blue-800 flex items-center justify-between px-2 pr-10 p-3">
-            <div class="flex items-center gap-4">
-                <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-12">
+    <header class="w-full fixed top-0 left-0 z-10">
+    <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
+    <div class="flex items-center justify-center flex-1">
                 <h1 class="text-white text-xl">Accounts</h1>
             </div>
 
@@ -18,7 +17,7 @@
                 <span class="text-lg font-bold">+</span>
             </a>
 
-            <article>
+            <article >
                 <form action="{{ route('account-dashboard') }}" method="GET" class="relative p-2 w-fit">
                     <img src="{{ asset('assets/search.png') }}" alt="Search Logo" class="w-3 absolute right-5 top-4">
                     <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search person..." name="search_person">
@@ -62,7 +61,7 @@
         </main>
     </article>
     
-    <section class="px-10 py-5 flex flex-col gap-3">
+    <section class="px-10 py-5 flex flex-col gap-3 pt-30" >
         @if ($errors->any())
             <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
                 <ul>

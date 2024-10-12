@@ -17,3 +17,5 @@ class User extends Authenticatable
         return $this->belongsTo(Baranggay::class);
     }
 }
+//jackiechan
+//sigesige

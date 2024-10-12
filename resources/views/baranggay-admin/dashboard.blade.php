@@ -1,25 +1,24 @@
 <x-baranggay-dashboard-layout>
     <x-slot:title>Baranggay Admin Dashboard</x-slot:title>
-    <header>
-        <aside class="bg-blue-800 p-3 flex items-center justify-between">
-            <article class="flex items-center gap-x-2 ">
-                <img src="{{ asset('assets/logo.png')}}" alt="Logo Image" class="w-16">
+     <header class="w-full fixed top-0 left-0 z-10">
+        <article class="w-full bg-blue-800 flex items-center justify-between px-2 pr-10 p-3">
+        <div class="flex items-center justify-center flex-1">
                 <h1 class="text-white text-xl font-bold">Residents</h1>
-            </article>
-
-            <article class="flex items-center gap-x-3">
-                <div class="bg-white p-2 rounded-lg overflow-hidden">
-                    <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
 
                 </div>
-                <a href="/specific-barangay-report/pdf/{{ auth()->user()->baranggay_id }}" class="normal-button">Download Report</a>
+                <article class="bg-white p-2 rounded-lg overflow-hidden">
+                <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
             </article>
-        </aside>
+        </article>
+
+        <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
+    <h1 class="text-white font-semibold text-lg text-center flex-1"> {{ auth()->user()->baranggay->baranggay_name }} </h1>
+    
+    <div class="flex items-center gap-2"> <!-- Add a wrapper for the download link and date -->
+        <h1 class="text-white font-semibold text-lg">{{ $date }}</h1>
+        <a href="/specific-barangay-report/pdf/{{ auth()->user()->baranggay_id }}" class="normal-button">Download Report</a>
+    </div>
         
-        <aside class="flex items-center justify-between bg-red-600 p-5">
-            <h1 class="text-white font-semibold text-lg text-center flex-1"> {{ auth()->user()->baranggay->baranggay_name }} </h1>
-            <h1 class="text-white font-semibold text-lg">{{ $date }}</h1>
-        </aside>
     </header>
 
     <article class="flex items-center justify-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%] z-10 hidden" id="notification-modal">
@@ -46,31 +45,39 @@
             </section>
         </main>
     </article>
-    
+  
+    <article class="px-3 pt-20"> <!-- Add padding-top to avoid content being hidden under the fixed header -->
+
     <section class="p-5 flex items-start flex-col gap-5 w-full">
-        @if (session('message'))
-            <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg mt-2">{{ session('message') }}</h1>
-        @endif
+    @if (session('message'))
+        <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg mt-2">{{ session('message') }}</h1>
+    @endif
+    </section>
 
-        <aside class="flex items-center justify-between gap-3 lg:grid lg:grid-cols-2 lg:items-center xl:flex w-full">
-            <article class="border-2 border-red-700 w-full h-[250px] rounded-md flex items-start justify-center pt-5 ">
-                {!! $sexChart->container() !!}
+    <section class="p-3 w-full flex gap-5 flex-col lg:flex-col xl:flex-row">
+    <aside class="flex flex-col gap-4 flex-1 lg:w-full xl:w-1/2">
+        <article class="flex items-center gap-5 flex-1">
+            <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
+            {!! $pwdStatusChart->container() !!}
+            </div>
+            <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
+            {!! $ageChart->container() !!}
+            </div>
             </article>
-            <article class="border-2 border-red-700 w-full h-[250px] rounded-md flex items-start justify-center pt-5 ">
-                {!! $ageChart->container() !!}
-            </article>
-            <article class="border-2 border-red-700 w-full h-[250px] rounded-md flex items-start justify-center pt-5 ">
-                {!! $civilStatusChart->container() !!}
-            </article>
-            <article class="border-2 border-red-700 w-full h-[250px] rounded-md flex items-start justify-center pt-5 ">
-                {!! $pwdStatusChart->container() !!}
-            </article>
-        </aside>
-
-        <article class="border-2 border-red-700 rounded-md w-full flex items-center justify-center pt-5">
+            <article class="flex items-center gap-5 flex-1">
+            <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
+            {!! $sexChart->container() !!}
+            </div>
+            <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
+                   {!! $civilStatusChart->container() !!}
+            </div>
+        </article>
+    </aside>
+    <article class="border-red-700 border-2 w-full flex justify-center h-[515px] rounded-lg pt-5 flex-1">
             {!! $disabilityTypeChart->container() !!}
         </article>
     </section>
+
     <section class="pb-5">
         <header>
             <aside class="w-full flex items-center justify-between p-5 bg-blue-800">

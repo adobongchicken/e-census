@@ -1,9 +1,9 @@
 <x-fieldworker-dashboard-layout>
     <x-slot:title>Register Residents</x-slot:title>
-    <header>
-        <aside class=" bg-blue-800 p-3 flex items-center justify-between border-2 border-blue-950 rounded-md">
-            <article class="flex items-center gap-x-4">
-                <img src="{{ asset('assets/logo.png')}}" alt="Logo Image" class="w-16">
+
+    <header class="w-full fixed top-0 left-0 z-10">
+    <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
+    <div class="flex items-center justify-center flex-1">
                 <h1 class="text-white text-lg font-medium">Register Residents</h1>
             </article>
 

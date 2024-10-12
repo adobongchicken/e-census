@@ -1,21 +1,25 @@
 <x-baranggay-dashboard-layout>
-    <x-slot:title>Events and Programs</x-slot:title>
-    
-    <header class="w-full bg-blue-800 p-3 flex items-center justify-between">
-        <article class="flex items-center gap-x-3">
-            <img src="{{ asset('assets/logo.png') }}" alt="Logo Image" class="w-16">
-            <h1 class="text-white text-xl font-medium">Events and Programs</h1>
-        </article>
+<x-slot:title>Dashboard</x-slot:title>
+    <header class="w-full fixed top-0 left-0 z-10">
+        <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
+            <div class="flex items-center justify-center flex-1">
+                <h1 class="text-white text-xl">Events And Programs</h1>
+            </div>
 
-        <article class="bg-white p-2 rounded-lg overflow-hidden">
-            <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
+            <article class="bg-white p-2 rounded-lg">
+                <div id="notification-button">
+                    <img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer">
+                </div>
+            </article>
         </article>
     </header>
+
     <article class="flex items-center justify-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%] z-10 hidden" id="notification-modal">
         <main class="w-1/2 bg-[#e4ccff]">
             <header class="bg-blue-800 p-5 rounded-md">
                 <h1 class="text-white text-lg text-center">Notifications</h1>
             </header>
+            
             <section class="p-3 flex flex-col gap-5">
                 @if ($todayEvent->count() > 0)
                     @foreach ($todayEvent as $event)
@@ -35,7 +39,7 @@
             </section>
         </main>
     </article>
-    <article class="px-3">
+    <article class="px-3 pt-10"> <!-- Add padding-top to avoid content being hidden under the fixed header -->
         @if (session('message'))
             <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg my-2">{{ session('message') }}</h1>
         @endif
