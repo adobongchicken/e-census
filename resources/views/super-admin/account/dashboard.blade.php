@@ -17,7 +17,7 @@
                 <span class="text-lg font-bold">+</span>
             </a>
 
-            <article>
+            <article >
                 <form action="{{ route('account-dashboard') }}" method="GET" class="relative p-2 w-fit">
                     <img src="{{ asset('assets/search.png') }}" alt="Search Logo" class="w-3 absolute right-5 top-4">
                     <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search person..." name="search_person">
