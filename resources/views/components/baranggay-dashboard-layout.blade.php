@@ -16,15 +16,13 @@
 </head>
 
 <body class="h-full flex">
-    <!-- Sidebar -->
-   <!-- Sidebar -->
-   <nav id="sidebar"
-        class="bg-white border-r border-red-300 h-screen w-30 transition-transform duration-300 ease-in-out"
-        :class="{ '-translate-x-full': !sidebarOpen }">
+
+    <nav id="sidebar" class="bg-white border-r border-gray-300 h-screen w-60 fixed top-0 left-0 z-50"> 
         <div class="flex items-center gap-x-2 px-4 mb-4"> <!-- Changed gap-x-4 to gap-x-2 -->
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-16">
             <h1 class="font-bold text-xl">Dashboard</h1>
         </div>
+
         <div class="flex-grow overflow-y-auto">
             <article class="flex flex-col w-full">
                 <x-nav-link href="/baranggay-admin/residents-reports" :active="request()->is('baranggay-admin/residents-reports')">Baranggay and Reports</x-nav-link>
@@ -50,10 +48,11 @@
         </article>
     </nav>
 
-    <!-- Main Content -->
-    <main class="flex-1 p-4 overflow-y-auto">
+     <!-- Main Content -->
+     <main class="flex-1 p-4 overflow-y-auto ml-64"> 
+        <!-- Added margin-left to offset sidebar width -->
         <button id="hamburger" class="p-2 text-gray-600 lg:hidden">
-            <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+            <i class="fas fa-bars"></i>
         </button>
         {{ $slot }}
     </main>

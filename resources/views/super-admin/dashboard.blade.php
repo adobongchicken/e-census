@@ -1,24 +1,24 @@
 <x-dashboard-layout>
     <x-slot:title>Dashboard</x-slot:title>
     <header class="w-full fixed top-0 left-0 z-10">
-    <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
-    <div class="flex items-center justify-center flex-1">
-        <h1 class="text-white text-xl">Barangays</h1>
-    </div>
-    
-    <article class="bg-white p-2 rounded-lg">
-        <div id="notification-button">
-            <img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer">
-        </div>
-    </article>
-</article>
+        <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
+            <div class="flex items-center justify-center flex-1">
+                <h1 class="text-white text-xl">Barangays</h1>
+            </div>
+
+            <article class="bg-white p-2 rounded-lg">
+                <div id="notification-button">
+                    <img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer">
+                </div>
+            </article>
+        </article>
     </header>
     <article class="flex items-center justify-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%] z-10 hidden" id="notification-modal">
         <main class="w-1/2 bg-[#e4ccff]">
             <header class="bg-blue-800 p-5 rounded-md">
                 <h1 class="text-white text-lg text-center">Notifications</h1>
             </header>
-            
+
             <section class="p-3 flex flex-col gap-5">
                 @if ($events->count() > 0)
                     @foreach ($events as $event)
@@ -54,9 +54,9 @@
         @endif
     </article>
     <article class="w-full flex items-center justify-between bg-blue-800 text-white p-2">
-            <h1 class="flex-1 text-center font-bold">Reports</h1>
-            <a href="{{ route('generate-baranggay-report') }}" class="normal-button">Download Reports</a>
-        </article>
+        <h1 class="flex-1 text-center font-bold">Reports</h1>
+        <a href="{{ route('generate-baranggay-report') }}" class="normal-button">Download Reports</a>
+    </article>
 
     <section class="p-3 w-full flex gap-5 flex-col lg:flex-col xl:flex-row">
         <aside class="flex flex-col gap-4 flex-1 lg:w-full xl:w-1/2">
@@ -65,13 +65,13 @@
                     {!! $totalGenderChart->container() !!}
                 </div>
                 <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
-                    {!! $ageChart->container() !!}
+                    {!! $civilStatusChart->container() !!}
                 </div>
             </article>
 
             <article class="flex items-center gap-5 flex-1">
-                <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
-                    {!! $civilStatusChart->container() !!}
+            <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
+                    {!! $ageChart->container() !!}
                 </div>
                 <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
                     {!! $statusChart->container() !!}
@@ -131,10 +131,9 @@
                 </tr>
                 @endforeach
             </tbody>
-            
         </table>
         <article class="flex items-center justify-center gap-3 py-3">
-            {{ $baranggays->links()}}
+            {{ $baranggays->links() }}
         </article>
     </section>
 
@@ -153,7 +152,6 @@
     {{ $ageChart->script() }}
     {{ $statusChart->script() }}
     {{ $pwdTypeChart->script() }}
-    
 
     <script>
         const notificationButton = document.getElementById('notification-button')

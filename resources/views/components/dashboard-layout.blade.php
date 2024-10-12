@@ -18,7 +18,7 @@
 
 <body class="h-full flex">
     <!-- Sidebar -->
-    <nav id="sidebar" class="bg-white border-r border-gray-300 h-screen w-64 fixed top-0 left-0 z-50"> 
+    <nav id="sidebar" class="bg-white border-r border-gray-300 h-screen w-60 fixed top-0 left-0 z-50"> 
         <!-- Sidebar content -->
         <div class="flex items-center gap-x-2 px-4 mb-4">
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-16">

@@ -1,25 +1,27 @@
 <x-baranggay-dashboard-layout>
     <x-slot:title>Baranggay Admin Dashboard</x-slot:title>
-    <header>
-        <aside class="bg-blue-800 p-3 flex items-center justify-between">
-            <article class="flex items-center gap-x-2 ">
-                <img src="{{ asset('assets/logo.png')}}" alt="Logo Image" class="w-16">
+    <header class="w-full fixed top-0 left-0 z-10">
+        <article class="w-full bg-blue-800 flex items-center justify-between px-2 pr-10 p-3">
+        <div class="flex items-center justify-center flex-1">
                 <h1 class="text-white text-xl font-bold">Residents</h1>
-            </article>
-
-            <article class="flex items-center gap-x-3">
-                <div class="bg-white p-2 rounded-lg overflow-hidden">
-                    <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
 
                 </div>
-                <a href="/specific-barangay-report/pdf/{{ auth()->user()->baranggay_id }}" class="normal-button">Download Report</a>
+                <article class="bg-white p-2 rounded-lg overflow-hidden">
+                <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
             </article>
-        </aside>
-        
+        </article>
+
         <aside class="flex items-center justify-between bg-red-600 p-5">
-            <h1 class="text-white font-semibold text-lg text-center flex-1"> {{ auth()->user()->baranggay->baranggay_name }} </h1>
-            <h1 class="text-white font-semibold text-lg">{{ $date }}</h1>
-        </aside>
+    <h1 class="text-white font-semibold text-lg text-center flex-1"> {{ auth()->user()->baranggay->baranggay_name }} </h1>
+    
+    <div class="flex items-center gap-2"> <!-- Add a wrapper for the download link and date -->
+        <h1 class="text-white font-semibold text-lg">{{ $date }}</h1>
+        <a href="/specific-barangay-report/pdf/{{ auth()->user()->baranggay_id }}" class="normal-button">Download Report</a>
+    </div>
+</aside>
+
+        
+        
     </header>
 
     <article class="flex items-center justify-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%] z-10 hidden" id="notification-modal">
