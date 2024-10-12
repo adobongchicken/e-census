@@ -64,7 +64,7 @@ class ChartController extends Controller
             ->setHeight(450)
             ->setGrid();
     }
-    
+
     public function programTotalGender($male, $female)
     {
         return $this->chart->barChart()
@@ -102,5 +102,29 @@ class ChartController extends Controller
             ->addData('Attended', $count)
             ->setHeight(300)
             ->setGrid();
+    }
+    public function birthdayMonthGraph($data)
+    {
+
+        $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        return $this->chart->barChart()
+            ->setTitle('Birthday')
+            ->setSubtitle('Total Persons with Disabilities (PWD) Celebrating Birthdays Each Month')
+            ->setLabels($months)
+            ->addData('Total: ', array_values($data))
+            ->setGrid()
+            ->setWidth(800)
+            ->setHeight(400);
+    }
+    public function cashGiftStatus($data)
+    {
+        return $this->chart->barChart()
+            ->setTitle('Status')
+            ->setSubtitle('Status of cash gift for each PWD')
+            ->setLabels(['Unreleased', 'Processing', 'Released'])
+            ->addData('Total: ', $data)
+            ->setGrid()
+            ->setHeight(400);
     }
 }

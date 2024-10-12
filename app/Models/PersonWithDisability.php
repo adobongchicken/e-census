@@ -32,4 +32,7 @@ class PersonWithDisability extends Model
     public function guardians() {
         return $this->hasOne(Guardian::class);
     }
+    public function birthdayCashGift() {
+        return $this->hasOne(BirthdayCashGift::class);
+    }
 }

@@ -23,6 +23,10 @@
         <article class="flex flex-col w-full">
             <x-nav-link href="/baranggay-admin/residents-reports" :active="request()->is('baranggay-admin/residents-reports')">Baranggay and Reports</x-nav-link>
             <x-nav-link href="/baranggay-admin/events-programs" :active="request()->is('baranggay-admin/events-programs')">Events and Program</x-nav-link>
+            @if (request()->is('baranggay-admin/events-programs*'))
+                <a  href="/baranggay-admin/events-programs/birthday-cash-gifts" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('baranggay-admin/events-programs/birthday-cash-gifts*') ? 'bg-red-600 text-white' : '' }} ">Birthday Cash Gifts</a>
+                <a  href="/baranggay-admin/events-programs/scholarship" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('baranggay-admin/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }} ">PWD Student Scholarship</a>
+            @endif
         </article>
 
         <article id="logout-button"

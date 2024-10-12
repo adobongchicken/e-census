@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InvitationMail;
+use App\Models\BirthdayCashGift;
 use App\Models\DisabilityType;
 use App\Models\EducationalAttainment;
 use App\Models\EmploymentRecord;
@@ -441,6 +442,10 @@ class FieldWorkerController extends Controller
             'guardian_full_name' => $request->guardian_full_name,
             'guardian_phone_number' => $request->guardian_phone_number,
             'guardian_relationship' => $request->guardian_relationship,
+        ]);
+
+        BirthdayCashGift::create([
+            'person_with_disability_id' => $newPWD->id
         ]);
         
         SubmittedForm::create([

@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BaranggayAdminController;
+use App\Http\Controllers\BirthdayCashGiftBarangayController;
+use App\Http\Controllers\BirthdayCashGiftsController;
+use App\Http\Controllers\BirthdayCashGiftsFieldworker;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FieldWorkerController;
 use App\Http\Controllers\NotificationController;
@@ -74,6 +77,13 @@ Route::middleware(['auth', RoleMiddleware::class . ':Super Admin'])->group(funct
     Route::post('/super-admin/dashboard/events-programs/attendance/add', [EventController::class, 'storeAttendance']);
 
     Route::patch('/super-admin/dashboard/events-programs/{event}/program/update', [EventController::class, 'storeUpdatedProgram']);
+
+    Route::get('/super-admin/dashboard/events-programs/birthday-cash-gifts', [BirthdayCashGiftsController::class, 'index'])->name('cashGifts.super-admin');
+    Route::get('/super-admin/dashboard/events-programs/birthday-cash-gifts/baranggay/{baranggay}', [BirthdayCashGiftsController::class, 'birthdayWithinBarangay'])->name('cashGifts.barangay.super-admin');
+    Route::get('/super-admin/dashboard/events-programs/birthday-cash-gifts/baranggay/{baranggay}/status/{personWithDisability}', [BirthdayCashGiftsController::class, 'updateStatusForm'])->name('cashGifts.updateForm.super-admin');
+
+    Route::patch('/super-admin/birhtday-cash-gift/update-status/{personWithDisability}', [BirthdayCashGiftsController::class,'storeStatus'])->name('cashGifts.updateForm.store.super-admin');
+
 });
 
 /* Barangagy Admin Section */
@@ -102,6 +112,10 @@ Route::middleware(['auth', RoleMiddleware::class . ':Baranggay Admin'])->group(f
     Route::patch('/event/update/{event}', [BaranggayAdminController::class, 'storeUpdatedEvent']);
     Route::delete('/pwd/delete/{personWithDisability}', [BaranggayAdminController::class, 'deletePWD']);
 
+    Route::get('/baranggay-admin/events-programs/birthday-cash-gifts', [BirthdayCashGiftBarangayController::class, 'index'])->name('cashGifts.barangay');
+    Route::get('/baranggay-admin/events-programs/birthday-cash-gifts/baranggay/status/{personWithDisability}', [BirthdayCashGiftBarangayController::class, 'updateStatusForm'])->name('cashGifts.updateForm');
+
+    Route::patch('/baranggay-admin/birhtday-cash-gift/update-status/{personWithDisability}', [BirthdayCashGiftBarangayController::class,'storeStatus'])->name('cashGifts.updateForm.store');
 });
 
 /* Field Worker Section */
@@ -126,6 +140,12 @@ Route::middleware(['auth', RoleMiddleware::class . ':Field Worker'])->group(func
     Route::patch('/field-worker/pwd/update/{personWithDisability}', [FieldWorkerController::class, 'storeUpdatedPWD']);
     Route::patch('/field-worker/event/update/{event}', [FieldWorkerController::class, 'storeUpdatedEvent']);
     Route::delete('/fieldworker/register-residents/{personWithDisability}/delete', [FieldWorkerController::class, 'deletePWD']);
+
+    Route::get('/fieldworker/events-programs/birthday-cash-gifts', [BirthdayCashGiftsFieldworker::class, 'index'])->name('cashGifts');
+    Route::get('/fieldworker/events-programs/birthday-cash-gifts/baranggay/status/{personWithDisability}', [BirthdayCashGiftsFieldworker::class, 'updateStatusForm'])->name('cashGifts.updateForm');
+
+    Route::patch('/fieldworker/birhtday-cash-gift/update-status/{personWithDisability}', [BirthdayCashGiftsFieldworker::class,'storeStatus'])->name('cashGifts.updateForm.store');
+
 });
 
 Route::middleware(['auth'])->group(function () {

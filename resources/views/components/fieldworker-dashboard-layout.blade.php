@@ -23,6 +23,10 @@
         <article class="flex flex-col w-full">
             <x-nav-link href="/fieldworker/register-residents" :active="request()->is('fieldworker/register-residents')">Register Residents</x-nav-link>
             <x-nav-link href="/fieldworker/events-programs" :active="request()->is('fieldworker/events-programs')">Events and Program</x-nav-link>
+            @if (request()->is('fieldworker/events-programs*'))
+                <a  href="/fieldworker/events-programs/birthday-cash-gifts" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('fieldworker/events-programs/birthday-cash-gifts*') ? 'bg-red-600 text-white' : '' }} ">Birthday Cash Gifts</a>
+                <a  href="/fieldworker/events-programs/scholarship" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('fieldworker/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }} ">PWD Student Scholarship</a>
+            @endif
         </article>
 
         <article id="logout-button"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Baranggay;
 use App\Models\BaranggayAdmin;
+use App\Models\BirthdayCashGift;
 use App\Models\DisabilityType;
 use App\Models\EducationalAttainment;
 use App\Models\EmploymentRecord;
@@ -537,6 +538,10 @@ class SuperAdminController extends Controller
             'guardian_full_name' => $request->guardian_full_name,
             'guardian_phone_number' => $request->guardian_phone_number,
             'guardian_relationship' => $request->guardian_relationship,
+        ]);
+
+        BirthdayCashGift::create([
+            'person_with_disability_id' => $newPWD
         ]);
 
         SubmittedForm::create([

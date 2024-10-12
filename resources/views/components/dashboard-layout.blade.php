@@ -24,6 +24,10 @@
             <x-nav-link href="/super-admin/dashboard" :active="request()->is('super-admin/dashboard') || request()->is('super-admin/dashboard/sort')">Barangay and Reports</x-nav-link>
             <x-nav-link href="/super-admin/dashboard/accounts" :active="request()->is('super-admin/dashboard/accounts') || request()->is('super-admin/dashboard/accounts/sort')">Accounts</x-nav-link>
             <x-nav-link href="/super-admin/dashboard/events-programs" :active="request()->is('super-admin/dashboard/events-programs')">Events and Programs</x-nav-link>
+            @if (request()->is('super-admin/dashboard/events-programs*'))
+                <a  href="/super-admin/dashboard/events-programs/birthday-cash-gifts" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/birthday-cash-gifts*') ? 'bg-red-600 text-white' : '' }} ">Birthday Cash Gifts</a>
+                <a  href="/super-admin/dashboard/events-programs/scholarship" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }} ">PWD Student Scholarship</a>
+            @endif
         </article>
 
         <article id="logout-button"
@@ -35,8 +39,6 @@
                 @endif
             </h1>
             <img src="{{ asset('assets/angle-small-down.png') }}" alt="Drop Down Logo" class="w-4">
-
-
         </article>
         <article class="self-end hidden" id="logout-section">
             <a href="/administrator/change-password/{{ auth()->user()->id }}" class="border-2 border-gray-600 text-xs p-1 rounded-sm font-medium px-3">Change Password</a>
