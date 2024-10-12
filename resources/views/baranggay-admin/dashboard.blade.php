@@ -45,35 +45,39 @@
             </section>
         </main>
     </article>
+  
     <article class="px-3 pt-20"> <!-- Add padding-top to avoid content being hidden under the fixed header -->
 
     <section class="p-5 flex items-start flex-col gap-5 w-full">
-        @if (session('message'))
-            <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg mt-2">{{ session('message') }}</h1>
-        @endif
+    @if (session('message'))
+        <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg mt-2">{{ session('message') }}</h1>
+    @endif
+    </section>
 
-        <section class="p-3 w-full flex gap-5 flex-col lg:flex-col xl:flex-row">
-        <aside class="flex flex-col gap-4 flex-1 lg:w-full xl:w-1/2">
-            <art class="flex items-center gap-5 flex-1">
+    <section class="p-3 w-full flex gap-5 flex-col lg:flex-col xl:flex-row">
+    <aside class="flex flex-col gap-4 flex-1 lg:w-full xl:w-1/2">
+        <article class="flex items-center gap-5 flex-1">
             <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
-                {!! $sexChart->container() !!}
-                </div>
-                <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
-                {!! $ageChart->container() !!}
-                </div>
-                <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
-                {!! $civilStatusChart->container() !!}
-              </div>
+            {!! $pwdStatusChart->container() !!}
+            </div>
             <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
-                {!! $pwdStatusChart->container() !!}
-                </div>
-                </article>
-        <article class="border-red-700 border-2 w-full flex justify-center h-[515px] rounded-lg pt-5 flex-1">            {!! $disabilityTypeChart->container() !!}
+            {!! $ageChart->container() !!}
+            </div>
+            </article>
+            <article class="flex items-center gap-5 flex-1">
+            <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
+            {!! $sexChart->container() !!}
+            </div>
+            <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
+                   {!! $civilStatusChart->container() !!}
+            </div>
+        </article>
+    </aside>
+    <article class="border-red-700 border-2 w-full flex justify-center h-[515px] rounded-lg pt-5 flex-1">
+            {!! $disabilityTypeChart->container() !!}
         </article>
     </section>
-    </section>
 
-    </article>
     <section class="pb-5">
         <header>
             <aside class="w-full flex items-center justify-between p-5 bg-blue-800">

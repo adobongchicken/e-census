@@ -1,4 +1,3 @@
-@props(['title'])
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 
@@ -18,7 +17,7 @@
 <body class="h-full flex">
 
     <nav id="sidebar" class="bg-white border-r border-gray-300 h-screen w-60 fixed top-0 left-0 z-50"> 
-        <div class="flex items-center gap-x-2 px-4 mb-4"> <!-- Changed gap-x-4 to gap-x-2 -->
+        <div class="flex items-center gap-x-2 px-4 mb-4"> 
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-16">
             <h1 class="font-bold text-xl">Dashboard</h1>
         </div>
@@ -43,14 +42,13 @@
         <article class="self-end hidden" id="logout-section">
             <form action="/auth/logout" method="POST">
                 @csrf
-                <button class="border-2 border-gray-600 text-xs p-1 rounded-sm font-medium px-3">Logout</button>
+                <button type="submit" class="border-2 border-gray-600 text-xs p-1 rounded-sm font-medium px-3">Logout</button>
             </form>
         </article>
     </nav>
 
      <!-- Main Content -->
      <main class="flex-1 p-4 overflow-y-auto ml-64"> 
-        <!-- Added margin-left to offset sidebar width -->
         <button id="hamburger" class="p-2 text-gray-600 lg:hidden">
             <i class="fas fa-bars"></i>
         </button>
@@ -58,16 +56,10 @@
     </main>
 
     <script>
-        const toggleButton = document.getElementById('toggle-button');
+        // Ensure toggle-button is defined if you're using it for sidebar toggling
         const sidebar = document.getElementById('sidebar');
         const hamburgerButton = document.getElementById('hamburger');
         let sidebarOpen = true;
-
-        // Toggle sidebar on close button click
-        toggleButton.addEventListener('click', () => {
-            sidebarOpen = !sidebarOpen;
-            sidebar.classList.toggle('-translate-x-full', !sidebarOpen);
-        });
 
         // Show sidebar when hamburger button is clicked
         hamburgerButton.addEventListener('click', () => {
@@ -80,6 +72,13 @@
 
         logoutButton.addEventListener('click', () => {
             logoutSection.classList.toggle('hidden');
+        });
+
+        // Optional: Click outside to close logout section
+        document.addEventListener('click', (event) => {
+            if (!logoutButton.contains(event.target) && !logoutSection.contains(event.target)) {
+                logoutSection.classList.add('hidden');
+            }
         });
     </script>
 </body>
