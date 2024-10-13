@@ -27,7 +27,7 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <div class="flex-grow overflow-y-auto">
+<div class="flex-grow overflow-y-auto">
     <article class="flex flex-col w-full">
         <x-nav-link href="/super-admin/dashboard" :active="request()->is('super-admin/dashboard') || request()->is('super-admin/dashboard/sort')">
             Barangay and Reports
@@ -43,7 +43,7 @@
             <a href="/super-admin/dashboard/events-programs/birthday-cash-gifts" class="w-[80%] self-end rounded-md border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/birthday-cash-gifts*') ? 'bg-red-600 text-white' : '' }}">
                 Birthday Cash Gifts
             </a>
-            <a href="#" class="w-[80%] self-end rounded-md border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }}">
+            <a href="/super-admin/dashboard/events-programs/scholarship" class="w-[80%] self-end rounded-md border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }}">
                 PWD Student Scholarship
             </a>
         @endif

@@ -48,7 +48,7 @@
                 {!! $baranggayChart->container() !!}
             </article>
         </aside>
-    </section>
+</section>
 
     <script src="{{ $sexChart->cdn() }}"></script>
     <script src="{{ $disabilitiesChart->cdn() }}"></script>

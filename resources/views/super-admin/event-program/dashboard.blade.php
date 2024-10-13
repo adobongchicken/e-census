@@ -40,7 +40,7 @@
         </main>
     </article>
 
-    <article class="px-3 pt-10"> <!-- Adjusted the padding-top -->
+    <article class="p-5"> <!-- Adjusted the padding-top -->
         @if (session('message'))
             <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg my-2">{{ session('message') }}</h1>
         @endif
@@ -57,7 +57,7 @@
             <div id="calendar"></div>
         </section>
 
-        <section class="flex-1">
+        <section class="flex-1  bg-white shadow-lg border-gray-200">
             <aside class="w-full bg-red-700 p-4 flex items-center justify-between">
                 <h1 class="text-white font-medium text-xl">Programs</h1>
                 <article class="flex items-center gap-x-2">

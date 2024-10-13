@@ -7,7 +7,7 @@
             </div>
 
             <article class="bg-white p-2 rounded-lg overflow-hidden">
-                <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
+                <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer"></div>
             </article>
         </article>
 
@@ -44,7 +44,7 @@
             <section class="p-3 flex flex-col gap-5">
                 @if ($events->count() > 0)
                     @foreach ($events as $event)
-                        <article class="flex flex-col gap-1 {{ $events->count() > 1 ? 'border-b border-red-700 pb-3' : ''}} ">
+                        <article class="flex flex-col gap-1 {{ $events->count() > 1 ? 'border-b border-red-700 pb-3' : ''}}">
                             <div class="flex items-center justify-between">
                                 <h1 class="font-bold text-sm">Program Name: <span class="text-xs font-medium">{{ $event->program_name }}</span></h1>
                                 <p class="text-xs font-medium">{{ \Carbon\Carbon::parse($event->time)->format('F j, Y') }}</p>
@@ -60,8 +60,8 @@
             </section>
         </main>
     </article>
-    
-    <section class="px-10 py-5 flex flex-col gap-3 pt-30" >
+
+    <section class="px-10 py-5 flex flex-col gap-3">
         @if ($errors->any())
             <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
                 <ul>
@@ -71,66 +71,67 @@
                 </ul>
             </div>
         @endif
-
         @if (session('message'))
             <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg my-2">{{ session('message') }}</h1>
         @endif
-        
-        <table class="border-collapse border border-gray-400 rounded-lg w-full">
-            <thead>
-                <tr>
-                    <th class="text-sm font-bold">ID</th>
-                    <th class="text-sm font-bold">Account Name</th>
-                    <th class="text-sm font-bold">Roles</th>
-                    <th class="text-sm font-bold">Assigned Brgy</th>
-                    <th class="text-sm font-bold">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($accounts->isEmpty())
-                    <h1 class="bg-red-400 w-full p-3 rounded-lg text-sm font-medium tracking-wide">No record found</h1>
-                @else
+
+        @if ($accounts->isEmpty())
+            <h1 class="bg-red-400 w-full p-3 rounded-lg text-sm font-medium tracking-wide">No record found</h1>
+        @else
+            <table class="border-collapse border border-gray-400 rounded-lg w-full">
+                <thead>
+                    <tr>
+                        <th class="text-sm font-bold">ID</th>
+                        <th class="text-sm font-bold">Account Name</th>
+                        <th class="text-sm font-bold">Roles</th>
+                        <th class="text-sm font-bold">Assigned Brgy</th>
+                        <th class="text-sm font-bold">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach ($accounts as $account)
                         <tr>
-                            <td class="text-center"> {{ $account->id }} </td>
+                            <td class="text-center">{{ $account->id }}</td>
                             <td>{{ $account->full_name }}</td>
-                            <td>{{ $account->account_type}}</td>
-                            <td>{{ $account->baranggay->baranggay_name}}</td>
+                            <td>{{ $account->account_type }}</td>
+                            <td>{{ $account->baranggay->baranggay_name }}</td>
                             <td>
                                 <div class="flex items-center justify-center gap-x-3">
-                                    <a href="/super-admin/dashboard/accounts/{{ $account->baranggay_id }}/view-census-data"><img src="{{ asset('assets/eye.png')}}" alt="View Image" class="w-5"></a>
-                                    <a href="/super-admin/dashboard/accounts/{{ $account->id }}/edit"><img src="{{ asset('assets/pencil.png')}}" alt="Edit Image" class="w-5"></a>
+                                    <a href="/super-admin/dashboard/accounts/{{ $account->baranggay_id }}/view-census-data"><img src="{{ asset('assets/eye.png') }}" alt="View Image" class="w-5"></a>
+                                    <a href="/super-admin/dashboard/accounts/{{ $account->id }}/edit"><img src="{{ asset('assets/pencil.png') }}" alt="Edit Image" class="w-5"></a>
                                     <form action="/super-admin/dashboard/accounts/{{ $account->id }}/delete" method="POST" onsubmit="return confirmDelete()">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="flex items-center justify-center"><img src="{{ asset('assets/trash.png')}}" alt="Delete Image" class="w-5"></button>
+                                        <button class="flex items-center justify-center"><img src="{{ asset('assets/trash.png') }}" alt="Delete Image" class="w-5"></button>
                                     </form>
                                 </div>
                             </td>
                         </tr>
                     @endforeach    
-                @endif
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        @endif
+        
         <article class="flex items-center justify-center gap-3 py-5">
-            {{ $accounts->links('vendor.pagination.tailwind')}}
+            {{ $accounts->links('vendor.pagination.tailwind') }}
         </article>
     </section>
+
     <script>
         function confirmDelete() {
             return confirm('Are you sure you want to delete this account? This action cannot be undone.');
         }
 
-        const notificationButton = document.getElementById('notification-button')
-        const notificationModal = document.getElementById('notification-modal')
-        const closeNotification = document.getElementById('close-notification')
+        const notificationButton = document.getElementById('notification-button');
+        const notificationModal = document.getElementById('notification-modal');
+        const closeNotification = document.getElementById('close-notification');
 
         notificationButton.addEventListener('click', () => {
-            notificationModal.classList.remove('hidden')
-        })
+            notificationModal.classList.remove('hidden');
+        });
 
         closeNotification.addEventListener('click', () => {
-            notificationModal.classList.add('hidden')
-        })
+            notificationModal.classList.add('hidden');
+        });
     </script>
 </x-dashboard-layout>
