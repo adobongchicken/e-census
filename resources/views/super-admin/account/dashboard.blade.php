@@ -1,6 +1,6 @@
 <x-dashboard-layout>
     <x-slot:title>User Dashboard</x-slot:title>
-    <header class="w-full fixed top-0 left-0 z-10">
+    <header class="w-full sticky top-0 left-0 z-10">
     <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
     <div class="flex items-center justify-center flex-1">
                 <h1 class="text-white text-xl">Accounts</h1>

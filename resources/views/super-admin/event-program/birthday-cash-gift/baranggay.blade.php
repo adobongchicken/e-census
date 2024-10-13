@@ -4,7 +4,7 @@
         <article class="w-full bg-blue-800 flex items-center justify-between px-2 pr-10 p-3">
             <h1 class="text-white text-xl flex-1 text-center">{{ $barangay->baranggay_name }}</h1>
             <div class="flex items-center gap-2">
-                <button class="normal-button">Download Reports</button>
+                <a href="/birthday-cash-gift/barangay/report/{{ $barangay->id }}" class="normal-button">Download Reports</a>
                 <article class="bg-white p-2 rounded-lg ">
                     <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
                 </article>
@@ -47,16 +47,16 @@
         <section class="w-full">
             <div class="bg-blue-800 p-3 flex justify-between">
                 <h1 class="text-white font-bold text-xl">List of Birthday Celebrants</h1>
-                <button class="normal-button">Download List</button>
+                <a href="/birthday-cash-gift/barangay/celebrant/{{$barangay->id}}" class="normal-button">Download List</a>
             </div>
             <div class="flex items-center justify-between bg-blue-400 p-3">
-                <form action="#" method="GET" class="relative p-2 w-fit">
+                <form action="/super-admin/dashboard/events-programs/birthday-cash-gifts/baranggay/{{ $barangay->id }}" method="GET" class="relative p-2 w-fit">
                     <img src="{{ asset('assets/search.png') }}" alt="Search Logo" class="w-3 absolute right-5 top-4">
                     <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search person..." name="search_person">
                 </form>
 
-                <form action="#" method="GET">
-                    <select name="sort_by" class="normal-button cursor-pointer" onchange="this.form.submit()">
+                <form action="/super-admin/dashboard/events-programs/birthday-cash-gifts/baranggay/{{ $barangay->id }}" method="GET">
+                    <select name="sort" class="normal-button cursor-pointer" onchange="this.form.submit()">
                         <option selected disabled>-- Sort By --</option>
                         <option>All</option>
                         <option value="processing">Processing</option>

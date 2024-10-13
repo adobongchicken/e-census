@@ -1,16 +1,16 @@
 <x-fieldworker-dashboard-layout>
     <x-slot:title>Register Residents</x-slot:title>
 
-    <header class="w-full fixed top-0 left-0 z-10">
-    <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
-    <div class="flex items-center justify-center flex-1">
+    <header class="w-full sticky top-0 left-0 z-10">
+        <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
+            <div>
                 <h1 class="text-white text-lg font-medium">Register Residents</h1>
-            </article>
+            </div>
 
-            <article class="bg-white p-2 rounded-lg overflow-hidden">
-                <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
-            </article>
-        </aside>
+            <div class="bg-white p-2 rounded-lg overflow-hidden">
+                    <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
+            </div>
+        </article>
 
         <aside class="bg-blue-800 p-3 flex items-center justify-between border-2 border-blue-950 rounded-md">
             <h1 class="text-white text-lg font-medium text-end w-[60%]">List of Residents with Disabilities</h1>
@@ -86,7 +86,6 @@
                     <option value="assisted" @selected($sort === 'assisted')>Assisted</option>
                 </select>
             </form>
-
         </aside>
     </header>
     @if (session('message'))

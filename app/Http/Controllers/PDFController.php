@@ -225,7 +225,7 @@ class PDFController extends Controller
     }
     public function programReport(Event $event)
     {
-        $personAttended = ProgramAttendance::with('personWithDisability')->where('event_id',  $event->id)->get();
+        $personAttended = ProgramAttendance::with('personWithDisability')->where('event_id', $event->id)->get();
 
         $disabilities = [];
 
@@ -275,5 +275,100 @@ class PDFController extends Controller
         ]);
 
         return $generatePDF->download($event->program_name . ' Report.pdf');
+    }
+    public function generateBirthdayCashGiftReport()
+    {
+
+        $calendarMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        $birthdayEachMonth = array_fill(1, 12, 0);
+
+        $barangay = Baranggay::get();
+
+        $currentMonth = Carbon::now()->month;
+        $birthMonth = PersonWithDisability::whereMonth('date_of_birth', $currentMonth)->get();
+
+        $birthdayPersons = PersonWithDisability::get();
+
+        $unreleased = $birthdayPersons->filter(function ($person) {
+            return $person->birthdayCashGift && $person->birthdayCashGift->status === 'unreleased';
+        })->count();
+
+        $released = $birthdayPersons->filter(function ($person) {
+            return $person->birthdayCashGift && $person->birthdayCashGift->status === 'released';
+        })->count();
+
+        $processing = $birthdayPersons->filter(function ($person) {
+            return $person->birthdayCashGift && $person->birthdayCashGift->status === 'processing';
+        })->count();
+
+        $status = [$unreleased, $processing, $released];
+
+        foreach ($birthdayPersons as $person) {
+            $months = Carbon::parse($person->date_of_birth)->month;
+            $birthdayEachMonth[$months]++;
+        }
+
+        $generatePDF = Pdf::loadView('report.birthday-cash-gift-report', data: [
+            'birthdayCount' => array_values($birthdayEachMonth),
+            'unreleased' => $unreleased,
+            'released' => $released,
+            'processing' => $processing,
+            'logo' => public_path('assets/logo.png'),
+            'pwd_logo' => public_path('assets/pwd-logo.jfif'),
+            'months' => $calendarMonth
+        ]);
+
+        return $generatePDF->download('Birthday Cash Gift Report.pdf');
+    }
+    public function generateBirthdayCashGiftReportWithinBarangay(Baranggay $baranggay)
+    {
+        $calendarMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        $birthdayEachMonth = array_fill(1, 12, 0);
+
+        $birthdayPersons = PersonWithDisability::where('present_baranggay', '=', $baranggay->baranggay_name)->get();
+
+        $unreleased = $birthdayPersons->filter(function ($person) {
+            return $person->birthdayCashGift && $person->birthdayCashGift->status === 'unreleased';
+        })->count();
+
+        $released = $birthdayPersons->filter(function ($person) {
+            return $person->birthdayCashGift && $person->birthdayCashGift->status === 'released';
+        })->count();
+
+        $processing = $birthdayPersons->filter(function ($person) {
+            return $person->birthdayCashGift && $person->birthdayCashGift->status === 'processing';
+        })->count();
+
+        foreach ($birthdayPersons as $person) {
+            $months = Carbon::parse($person->date_of_birth)->month;
+            $birthdayEachMonth[$months]++;
+        }
+
+        $generatePDF = Pdf::loadView('report.birthday-cash-gift-report-within-barangay', data: [
+            'birthdayCount' => array_values($birthdayEachMonth),
+            'unreleased' => $unreleased,
+            'released' => $released,
+            'processing' => $processing,
+            'logo' => public_path('assets/logo.png'),
+            'pwd_logo' => public_path('assets/pwd-logo.jfif'),
+            'months' => $calendarMonth,
+            'barangay' => $baranggay
+        ]);
+
+        return $generatePDF->download('Birthday Cash Gift Report ' . $baranggay->baranggay_name . '.pdf');
+    }
+    public function celebrantList(Baranggay $baranggay)
+    {
+        $birthdayPersons = PersonWithDisability::where('present_baranggay', '=', $baranggay->baranggay_name)->get();
+
+        $generatePDF = Pdf::loadView('report.celebrant-list', [
+            'logo' => public_path('assets/logo.png'),
+            'pwd_logo' => public_path('assets/pwd-logo.jfif'),
+            'persons' => $birthdayPersons
+        ]);
+
+        return $generatePDF->download('List of Celebrants.pdf');
     }
 }

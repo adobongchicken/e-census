@@ -14,11 +14,14 @@ class BirthdayCashGiftsController extends Controller
     public function index(Request $request, ChartController $chart)
     {
         $birthdayEachMonth = array_fill(1, 12, 0);
+        $sort = $request->sort;
+        $search = $request->search_baranggay;
 
         $currentDate = Carbon::now()->format('Y-m-d');
 
         $todaysEvent = Event::where('date', '=', $currentDate)->get();
         $barangay = Baranggay::get();
+        $baranggayQuery = Baranggay::query();
 
         $currentMonth = Carbon::now()->month;
         $birthMonth = PersonWithDisability::whereMonth('date_of_birth', $currentMonth)->get();
@@ -44,6 +47,19 @@ class BirthdayCashGiftsController extends Controller
             $birthdayEachMonth[$months]++;
         }
 
+        if ($search) {
+            $baranggayQuery->where('baranggay_name', 'LIKE', '%' . $search . '%');
+        }
+
+        if ($sort === 'asc') {
+            $baranggayQuery->orderBy('baranggay_name', 'asc');
+        } else if ($sort === 'desc') {
+            $baranggayQuery->orderBy('baranggay_name', 'desc');
+        } else {
+            $baranggayQuery->orderBy('baranggay_name', 'asc');
+        }
+
+        $barangay = $baranggayQuery->get();
         return view('super-admin.event-program.birthday-cash-gift.dashboard', [
             'events' => $todaysEvent,
             'barangay' => $barangay,
@@ -52,9 +68,10 @@ class BirthdayCashGiftsController extends Controller
             'birthdayNotification' => $birthMonth
         ]);
     }
-    public function birthdayWithinBarangay(Baranggay $baranggay, ChartController $chart)
+    public function birthdayWithinBarangay(Request $request, Baranggay $baranggay, ChartController $chart)
     {
         $birthdayEachMonth = array_fill(1, 12, 0);
+        $birthdayPersonsQuery = PersonWithDisability::with('birthdayCashGift')->where('present_baranggay', '=', $baranggay->baranggay_name);
 
         $birthdayPersons = PersonWithDisability::where('present_baranggay', '=', $baranggay->baranggay_name)->get();
 
@@ -79,6 +96,30 @@ class BirthdayCashGiftsController extends Controller
             $months = Carbon::parse($person->date_of_birth)->month;
             $birthdayEachMonth[$months]++;
         }
+
+        $sort = $request->sort;
+        $search = $request->search_person;
+
+        if ($search) {
+            $birthdayPersonsQuery->where('first_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $search . '%');
+        }
+
+        if ($sort === 'processing') {
+            $birthdayPersonsQuery->whereHas('birthdayCashGift', function ($query) {
+                $query->where('status', '=', 'processing');
+            });
+        } else if ($sort === 'unreleased') {
+            $birthdayPersonsQuery->whereHas('birthdayCashGift', function ($query) {
+                $query->where('status', '=', 'unreleased');
+            });
+        } else if ($sort === 'released') {
+            $birthdayPersonsQuery->whereHas('birthdayCashGift', function ($query) {
+                $query->where('status', '=', 'released');
+            });
+        }
+
+        $birthdayPersons = $birthdayPersonsQuery->get();
 
         return view('super-admin.event-program.birthday-cash-gift.baranggay', [
             'barangay' => $baranggay,

@@ -7,7 +7,7 @@
                 <h1 class="text-white text-xl">Birthday Cash Gifts</h1>
             </div>
             <div class="flex items-center gap-2">
-                <button class="normal-button">Download Reports</button>
+                <a href="{{ route('generate-cash-gift-report') }}" class="normal-button text-center">Download Reports</a>
                 <article class="bg-white p-2 rounded-lg ">
                     <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer "></div>
                 </article>
@@ -57,13 +57,13 @@
                 <h1 class="text-white font-bold text-xl">List of Baranggay</h1>
             </div>
             <div class="flex items-center justify-between bg-blue-800 p-3">
-                <form action="#" method="GET" class="relative p-2 w-fit">
+                <form action="/super-admin/dashboard/events-programs/birthday-cash-gifts" method="GET" class="relative p-2 w-fit">
                     <img src="{{ asset('assets/search.png') }}" alt="Search Logo" class="w-3 absolute right-5 top-4">
-                    <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search barangay..." name="search_person">
+                    <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search barangay..." name="search_baranggay">
                 </form>
 
-                <form action="#" method="GET">
-                    <select name="sort_by" class="normal-button cursor-pointer" onchange="this.form.submit()">
+                <form action="/super-admin/dashboard/events-programs/birthday-cash-gifts" method="GET">
+                    <select name="sort" class="normal-button cursor-pointer" onchange="this.form.submit()">
                         <option selected disabled>-- Sort By --</option>
                         <option>All</option>
                         <option value="asc">Ascending</option>

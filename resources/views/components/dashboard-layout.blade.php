@@ -28,24 +28,27 @@
             </button>
         </div>
         <div class="flex-grow overflow-y-auto">
-            <article class="flex flex-col w-full">
-                <x-nav-link href="/super-admin/dashboard" :active="request()->is('super-admin/dashboard') || request()->is('super-admin/dashboard/sort')">Barangay and Reports</x-nav-link>
-                <x-nav-link href="/super-admin/dashboard/accounts" :active="request()->is('super-admin/dashboard/accounts') || request()->is('super-admin/dashboard/accounts/sort')">Accounts</x-nav-link>
-                <x-nav-link href="/super-admin/dashboard/events-programs" :active="request()->is('super-admin/dashboard/events-programs')">Events and Programs</x-nav-link>
-            </article>
-        </div>
-<<<<<<< HEAD
-        <article class="flex flex-col w-full">
-            <x-nav-link href="/super-admin/dashboard" :active="request()->is('super-admin/dashboard') || request()->is('super-admin/dashboard/sort')">Barangay and Reports</x-nav-link>
-            <x-nav-link href="/super-admin/dashboard/accounts" :active="request()->is('super-admin/dashboard/accounts') || request()->is('super-admin/dashboard/accounts/sort')">Accounts</x-nav-link>
-            <x-nav-link href="/super-admin/dashboard/events-programs" :active="request()->is('super-admin/dashboard/events-programs')">Events and Programs</x-nav-link>
-            @if (request()->is('super-admin/dashboard/events-programs*'))
-                <a  href="/super-admin/dashboard/events-programs/birthday-cash-gifts" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/birthday-cash-gifts*') ? 'bg-red-600 text-white' : '' }} ">Birthday Cash Gifts</a>
-                <a  href="/super-admin/dashboard/events-programs/scholarship" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }} ">PWD Student Scholarship</a>
-            @endif
-        </article>
-=======
->>>>>>> 005abb5f259ba37118135135276bee88ca4a1e10
+    <article class="flex flex-col w-full">
+        <x-nav-link href="/super-admin/dashboard" :active="request()->is('super-admin/dashboard') || request()->is('super-admin/dashboard/sort')">
+            Barangay and Reports
+        </x-nav-link>
+        <x-nav-link href="/super-admin/dashboard/accounts" :active="request()->is('super-admin/dashboard/accounts') || request()->is('super-admin/dashboard/accounts/sort')">
+            Accounts
+        </x-nav-link>
+        <x-nav-link href="/super-admin/dashboard/events-programs" :active="request()->is('super-admin/dashboard/events-programs')">
+            Events and Programs
+        </x-nav-link>
+
+        @if (request()->is('super-admin/dashboard/events-programs*'))
+            <a href="/super-admin/dashboard/events-programs/birthday-cash-gifts" class="w-[80%] self-end rounded-md border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/birthday-cash-gifts*') ? 'bg-red-600 text-white' : '' }}">
+                Birthday Cash Gifts
+            </a>
+            <a href="#" class="w-[80%] self-end rounded-md border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }}">
+                PWD Student Scholarship
+            </a>
+        @endif
+    </article>
+</div>
 
         <article id="logout-button" class="w-full mt-8 p-3 border-2 border-red-600 flex items-center justify-between cursor-pointer">
             <h1 class="flex items-center justify-center gap-x-3 text-sm">

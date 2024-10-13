@@ -163,5 +163,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/program/pdf/{event}', [PDFController::class, 'programEvent']);
     Route::get('/program/report/{event}', [PDFController::class, 'programReport']);
 
+    Route::get('/birthday-cash-gift/report', [PDFController::class, 'generateBirthdayCashGiftReport'])->name('generate-cash-gift-report');
+    Route::get('/birthday-cash-gift/barangay/report/{baranggay}', [PDFController::class, 'generateBirthdayCashGiftReportWithinBarangay'])->name('generate-cash-gift-report-barangay');
+    Route::get('/birthday-cash-gift/barangay/celebrant/{baranggay}', [PDFController::class, 'celebrantList'])->name('celebrant-list');
+
     Route::post('/auth/logout', [AuthController::class, 'logoutUser']);
 });

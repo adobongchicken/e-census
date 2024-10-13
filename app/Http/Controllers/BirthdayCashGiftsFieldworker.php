@@ -10,11 +10,12 @@ use Carbon\Carbon;
 
 class BirthdayCashGiftsFieldworker extends Controller
 {
-    public function index(ChartController $chart)
+    public function index(Request $request, ChartController $chart)
     {
         $birthdayEachMonth = array_fill(1, 12, 0);
 
         $baranggay = Baranggay::where('baranggay_name', '=', auth()->user()->baranggay->baranggay_name)->first();
+        $birthdayPersonsQuery = PersonWithDisability::with('birthdayCashGift')->where('present_baranggay', '=', $baranggay->baranggay_name);
 
         $birthdayPersons = PersonWithDisability::where('present_baranggay', '=', $baranggay->baranggay_name)->get();
 
@@ -39,6 +40,30 @@ class BirthdayCashGiftsFieldworker extends Controller
             $months = Carbon::parse($person->date_of_birth)->month;
             $birthdayEachMonth[$months]++;
         }
+
+        $sort = $request->sort;
+        $search = $request->search_person;
+
+        if ($search) {
+            $birthdayPersonsQuery->where('first_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $search . '%');
+        }
+
+        if ($sort === 'processing') {
+            $birthdayPersonsQuery->whereHas('birthdayCashGift', function ($query) {
+                $query->where('status', '=', 'processing');
+            });
+        } else if ($sort === 'unreleased') {
+            $birthdayPersonsQuery->whereHas('birthdayCashGift', function ($query) {
+                $query->where('status', '=', 'unreleased');
+            });
+        } else if ($sort === 'released') {
+            $birthdayPersonsQuery->whereHas('birthdayCashGift', function ($query) {
+                $query->where('status', '=', 'released');
+            });
+        }
+
+        $birthdayPersons = $birthdayPersonsQuery->get();
 
         return view('fieldworker.events-program.birthday-cash-gift.baranggay', [
             'barangay' => $baranggay,
