@@ -10,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
 </head>
-<body>
+
     <header class="flex items-center justify-between p-3 bg-blue-800">
         <div class="flex items-center gap-2">
             <article class="relative bg-white p-2 rounded-lg">
@@ -48,7 +48,7 @@
                 {!! $baranggayChart->container() !!}
             </article>
         </aside>
-    </section>
+</section>
 
     <script src="{{ $sexChart->cdn() }}"></script>
     <script src="{{ $disabilitiesChart->cdn() }}"></script>

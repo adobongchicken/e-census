@@ -11,24 +11,23 @@
             </article>
         </article>
 
-        <article class="w-full flex items-center justify-between bg-[#0d99ff] text-white p-2">
-
-            <a href="/super-admin/dashboard/accounts/create-account" class="normal-button py-1 font-medium flex items-center gap-2 justify-center">
+        <article class="w-full flex items-center justify-center bg-[#0d99ff] text-white p-2 space-x-10">
+            <a href="/super-admin/dashboard/accounts/create-account" class="normal-button py-1 font-medium flex items-center gap-2">
                 Create Account 
                 <span class="text-lg font-bold">+</span>
             </a>
-                <form action="{{ route('account-dashboard') }}" method="GET" class="relative p-2 w-fit">
-                    <img src="{{ asset('assets/search.png') }}" alt="Search Logo" class="w-3 absolute right-5 top-4">
-                    <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search person..." name="search_person">
-                </form>
-            <article>
 
-            <form action="{{ route('account-dashboard') }}" method="GET">
+            <form action="{{ route('account-dashboard') }}" method="GET" class="relative p-2 w-fit">
+                <img src="{{ asset('assets/search.png') }}" alt="Search Logo" class="w-3 absolute right-5 top-4">
+                <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search person..." name="search_person">
+            </form>
+
+            <form class action="{{ route('account-dashboard') }}" method="GET">
                 <select name="sort_by" class="normal-button cursor-pointer" onchange="this.form.submit()">
                     <option selected disabled>-- Sort By --</option>
                     <option>All</option>
                     <option value="Super Admin" @selected($sort === 'Super Admin')>Super Admin</option>
-                    <option value="Baranggay Admin" @selected($sort === 'Baranggay Admin')>Barangay Admin</option>
+                    <option value="Barangay Admin" @selected($sort === 'Barangay Admin')>Barangay Admin</option>
                     <option value="Field Worker" @selected($sort === 'Field Worker')>Field Worker</option>
                 </select>
             </form>
@@ -61,7 +60,7 @@
     </article>
 
     <article class="px-3 pt-20"> <!-- Add padding-top to avoid content being hidden under the fixed header -->
-    <seartctio class="px-10 py-5 flex flex-col gap-3">
+    <section class="px-10 py-5 flex flex-col gap-3">
         @if ($errors->any())
             <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
                 <ul>

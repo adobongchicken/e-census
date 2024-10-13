@@ -1,9 +1,8 @@
 <x-dashboard-layout>
     <x-slot:title>Birthday Cash Gift</x-slot:title>
-    <header class="w-full relative">
-        <article class="w-full bg-blue-800 flex items-center justify-between px-2 pr-10 p-3">
-            <div class="flex items-center gap-4">
-                <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-12">
+   <header class="w-full fixed top-0 left-0 z-10">
+        <article class="w-full bg-blue-700 flex items-center justify-between px-2 pr-10 p-3">
+            <div class="flex items-center justify-center flex-1">
                 <h1 class="text-white text-xl">Birthday Cash Gifts</h1>
             </div>
             <div class="flex items-center gap-2">

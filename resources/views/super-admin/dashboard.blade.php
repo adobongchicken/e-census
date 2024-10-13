@@ -39,7 +39,7 @@
         </main>
     </article>
 
-    <article class="px-3 pt-20"> <!-- Add padding-top to avoid content being hidden under the fixed header -->
+    <article class="p-5"> <!-- Add padding-top to avoid content being hidden under the fixed header -->
         @if (session('message'))
             <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg my-2">{{ session('message') }}</h1>
         @endif
@@ -53,12 +53,13 @@
             </div>
         @endif
     </article>
+
     <article class="w-full flex items-center justify-between bg-blue-800 text-white p-2">
         <h1 class="flex-1 text-center font-bold">Reports</h1>
         <a href="{{ route('generate-baranggay-report') }}" class="normal-button">Download Reports</a>
     </article>
 
-    <section class="p-3 w-full flex gap-5 flex-col lg:flex-col xl:flex-row">
+    <section class="p-3 w-full flex gap-5 flex-col lg:flex-col xl:flex-row bg-white shadow-lg border-gray-200 bord">
         <aside class="flex flex-col gap-4 flex-1 lg:w-full xl:w-1/2">
             <article class="flex items-center gap-5 flex-1">
                 <div class="border-red-700 border-2 h-[250px] w-full flex justify-center rounded-lg pt-5">
