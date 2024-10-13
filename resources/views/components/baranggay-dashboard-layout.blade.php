@@ -21,7 +21,8 @@
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-16">
             <h1 class="font-bold text-xl">Dashboard</h1>
         </div>
-        <div class="flex-grow overflow-y-auto">
+<<<<<<< HEAD
+        <article class="flex flex-col w-full">
             <x-nav-link href="/baranggay-admin/residents-reports" :active="request()->is('baranggay-admin/residents-reports')">Baranggay and Reports</x-nav-link>
             <x-nav-link href="/baranggay-admin/events-programs" :active="request()->is('baranggay-admin/events-programs')">Events and Program</x-nav-link>
             @if (request()->is('baranggay-admin/events-programs*'))
@@ -29,8 +30,15 @@
                 <a  href="/baranggay-admin/events-programs/scholarship" class="w-[80%] self-end rounded-md  border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('baranggay-admin/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }} ">PWD Student Scholarship</a>
             @endif
         </article>
-            
+=======
+
+        <div class="flex-grow overflow-y-auto">
+            <article class="flex flex-col w-full">
+                <x-nav-link href="/baranggay-admin/residents-reports" :active="request()->is('baranggay-admin/residents-reports')">Baranggay and Reports</x-nav-link>
+                <x-nav-link href="/baranggay-admin/events-programs" :active="request()->is('baranggay-admin/events-programs')">Events and Program</x-nav-link>
+            </article>
         </div>
+>>>>>>> 005abb5f259ba37118135135276bee88ca4a1e10
 
         <article id="logout-button"
             class="w-full mt-8 p-3 border-2 border-gray-600 flex items-center justify-between cursor-pointer">

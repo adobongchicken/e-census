@@ -141,6 +141,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':Field Worker'])->group(func
     Route::patch('/field-worker/event/update/{event}', [FieldWorkerController::class, 'storeUpdatedEvent']);
     Route::delete('/fieldworker/register-residents/{personWithDisability}/delete', [FieldWorkerController::class, 'deletePWD']);
 
+    
     Route::get('/fieldworker/events-programs/birthday-cash-gifts', [BirthdayCashGiftsFieldworker::class, 'index'])->name('cashGifts');
     Route::get('/fieldworker/events-programs/birthday-cash-gifts/baranggay/status/{personWithDisability}', [BirthdayCashGiftsFieldworker::class, 'updateStatusForm'])->name('cashGifts.updateForm');
 
