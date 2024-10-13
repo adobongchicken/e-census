@@ -53,7 +53,7 @@
             </div>
         @endif
     </article>
-
+    
     <article class="w-full flex items-center justify-between bg-blue-800 text-white p-2">
         <h1 class="flex-1 text-center font-bold">Reports</h1>
         <a href="{{ route('generate-baranggay-report') }}" class="normal-button">Download Reports</a>
