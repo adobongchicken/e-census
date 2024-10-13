@@ -27,7 +27,7 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <div class="flex-grow overflow-y-auto">
+<div class="flex-grow overflow-y-auto">
     <article class="flex flex-col w-full">
         <x-nav-link href="/super-admin/dashboard" :active="request()->is('super-admin/dashboard') || request()->is('super-admin/dashboard/sort')">
             Barangay and Reports

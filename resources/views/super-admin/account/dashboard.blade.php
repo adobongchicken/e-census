@@ -12,17 +12,16 @@
         </article>
 
         <article class="w-full flex items-center justify-between bg-[#0d99ff] text-white p-2">
+
             <a href="/super-admin/dashboard/accounts/create-account" class="normal-button py-1 font-medium flex items-center gap-2 justify-center">
                 Create Account 
                 <span class="text-lg font-bold">+</span>
             </a>
-
-            <article>
                 <form action="{{ route('account-dashboard') }}" method="GET" class="relative p-2 w-fit">
                     <img src="{{ asset('assets/search.png') }}" alt="Search Logo" class="w-3 absolute right-5 top-4">
                     <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search person..." name="search_person">
                 </form>
-            </article>
+            <article>
 
             <form action="{{ route('account-dashboard') }}" method="GET">
                 <select name="sort_by" class="normal-button cursor-pointer" onchange="this.form.submit()">
@@ -62,7 +61,7 @@
     </article>
 
     <article class="px-3 pt-20"> <!-- Add padding-top to avoid content being hidden under the fixed header -->
-    <section class="px-10 py-5 flex flex-col gap-3">
+    <seartctio class="px-10 py-5 flex flex-col gap-3">
         @if ($errors->any())
             <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
                 <ul>
@@ -72,11 +71,10 @@
                 </ul>
             </div>
         @endif
-
+</article>
         @if (session('message'))
             <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg my-2">{{ session('message') }}</h1>
         @endif
-        </section>
 
         @if ($accounts->isEmpty())
             <h1 class="bg-red-400 w-full p-3 rounded-lg text-sm font-medium tracking-wide">No record found</h1>
