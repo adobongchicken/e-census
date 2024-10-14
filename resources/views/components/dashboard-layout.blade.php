@@ -18,16 +18,15 @@
 
 <body class="h-full flex">
     <!-- Sidebar -->
-    <nav id="sidebar" class="bg-white border-r border-gray-300 h-screen w-60 fixed top-0 left-0 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+    <nav id="sidebar" class="bg-white border-r border-gray-300 h-screen w-60 fixed top-0 left-0 z-50"> 
         <!-- Sidebar content -->
         <div class="flex items-center gap-x-2 px-4 mb-4">
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-16">
             <h1 class="font-bold text-xl">Dashboard</h1>
             <button id="toggle-button" class="p-2 text-gray-600 lg:hidden">
-                <img src="{{ asset('assets/close.png') }}" alt="Close Sidebar" class="w-6 h-6">
+                <i class="fas fa-times"></i>
             </button>
         </div>
-<<<<<<< Updated upstream
 <div class="flex-grow overflow-y-auto">
     <article class="flex flex-col w-full">
         <x-nav-link href="/super-admin/dashboard" :active="request()->is('super-admin/dashboard') || request()->is('super-admin/dashboard/sort')">
@@ -50,30 +49,6 @@
         @endif
     </article>
 </div>
-=======
-        <div class="flex-grow overflow-y-auto">
-            <article class="flex flex-col w-full">
-                <x-nav-link href="/super-admin/dashboard" :active="request()->is('super-admin/dashboard') || request()->is('super-admin/dashboard/sort')">
-                    Barangay and Reports
-                </x-nav-link>
-                <x-nav-link href="/super-admin/dashboard/accounts" :active="request()->is('super-admin/dashboard/accounts') || request()->is('super-admin/dashboard/accounts/sort')">
-                    Accounts
-                </x-nav-link>
-                <x-nav-link href="/super-admin/dashboard/events-programs" :active="request()->is('super-admin/dashboard/events-programs')">
-                    Events and Programs
-                </x-nav-link>
-
-                @if (request()->is('super-admin/dashboard/events-programs*'))
-                    <a href="/super-admin/dashboard/events-programs/birthday-cash-gifts" class="w-[80%] self-end rounded-md border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/birthday-cash-gifts*') ? 'bg-red-600 text-white' : '' }}">
-                        Birthday Cash Gifts
-                    </a>
-                    <a href="#" class="w-[80%] self-end rounded-md border-red-700 border p-2 py-3 text-center cursor-pointer text-sm font-medium {{ request()->is('super-admin/dashboard/events-programs/scholarship') ? 'bg-red-600 text-white' : '' }}">
-                        PWD Student Scholarship
-                    </a>
-                @endif
-            </article>
-        </div>
->>>>>>> Stashed changes
 
         <article id="logout-button" class="w-full mt-8 p-3 border-2 border-red-600 flex items-center justify-between cursor-pointer">
             <h1 class="flex items-center justify-center gap-x-3 text-sm">
@@ -84,7 +59,6 @@
             </h1>
             <img src="{{ asset('assets/angle-small-down.png') }}" alt="Drop Down Logo" class="w-4">
         </article>
-        
         <article class="self-end hidden" id="logout-section">
             <a href="/administrator/change-password/{{ auth()->user()->id }}" class="border-2 border-gray-600 text-xs p-1 rounded-sm font-medium px-3">Change Password</a>
             <form action="/auth/logout" method="POST">
@@ -95,9 +69,10 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-1 p-4 overflow-y-auto lg:ml-64"> 
-        <button id="hamburger" class="p-2 text-gray-600 lg:hidden fixed top-4 left-4 z-50">
-            <img src="{{ asset('assets/hamburger.png') }}" alt="Open Sidebar" class="w-6 h-6">
+    <main class="flex-1 p-4 overflow-y-auto ml-64"> 
+        <!-- Added margin-left to offset sidebar width -->
+        <button id="hamburger" class="p-2 text-gray-600 lg:hidden">
+            <i class="fas fa-bars"></i>
         </button>
         {{ $slot }}
     </main>
@@ -106,12 +81,12 @@
         const toggleButton = document.getElementById('toggle-button');
         const sidebar = document.getElementById('sidebar');
         const hamburgerButton = document.getElementById('hamburger');
-        let sidebarOpen = false;
+        let sidebarOpen = true;
 
         // Toggle sidebar on close button click
         toggleButton.addEventListener('click', () => {
-            sidebarOpen = false;
-            sidebar.classList.add('-translate-x-full');
+            sidebarOpen = !sidebarOpen;
+            sidebar.classList.toggle('-translate-x-full', !sidebarOpen);
         });
 
         // Show sidebar when hamburger button is clicked

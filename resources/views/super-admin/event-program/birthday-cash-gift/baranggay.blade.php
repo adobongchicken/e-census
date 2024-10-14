@@ -1,8 +1,7 @@
 <x-dashboard-layout>
     <x-slot:title>Birthday Cash Gift - {{ $barangay->baranggay_name }}</x-slot:title>
-    <header class="w-full fixed top-0 left-0 z-10">
-        <article class="w-full bg-blue-600 flex items-center justify-between px-2 pr-10 p-3">
-            <div class="flex items-center justify-center flex-1">
+    <header class="w-full relative">
+        <article class="w-full bg-blue-800 flex items-center justify-between px-2 pr-10 p-3">
             <h1 class="text-white text-xl flex-1 text-center">{{ $barangay->baranggay_name }}</h1>
             <div class="flex items-center gap-2">
                 <a href="/birthday-cash-gift/barangay/report/{{ $barangay->id }}" class="normal-button">Download Reports</a>
@@ -35,22 +34,16 @@
         </main>
     </article>
     <main class="p-5">
-    <section class="p-8 bg-white shadow-lg border-gray-200 border-2 rounded-lg">
-    <aside class="flex gap-5 h-full">
-        <article class="border-2 border-red-700 rounded-md h-full w-[70%] flex p-5">
-            <div class="flex-grow">
-                {!! $birthdayChart->container() !!}
-            </div>
-        </article>
-        <article class="border-2 border-red-700 rounded-md h-full flex-1 flex p-5">
-            <div class="flex-grow">
-                {!! $statusChart->container() !!}
-            </div>
-        </article>
-    </aside>
-</section>
-
-
+        <section class="p-8 bg-white shadow-lg border-gray-200 border-2  rounded-lg">
+            <aside class="flex gap-5 h-full">
+                <article class="border-2 border-red-700 rounded-md h-full w-[70%] flex p-5">
+                    {!! $birthdayChart->container() !!}
+                </article>
+                <article class="border-2 border-red-700 rounded-md h-full flex-1 flex p-5">
+                   {!! $statusChart->container() !!}
+                </article>
+            </aside>
+        </section>
         <section class="w-full">
             <div class="bg-blue-800 p-3 flex justify-between">
                 <h1 class="text-white font-bold text-xl">List of Birthday Celebrants</h1>
