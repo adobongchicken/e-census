@@ -1,29 +1,41 @@
 <x-dashboard-layout>
     <x-slot:title>User Dashboard</x-slot:title>
-    <header class="w-full sticky top-0 left-0 z-10">
-    <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
-    <div class="flex items-center justify-center flex-1">
+
+    <!-- First Header -->
+    <header class="w-full fixed top-0 left-0 z-10">
+        <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
+            <div class="flex items-center justify-center flex-1">
                 <h1 class="text-white text-xl">Accounts</h1>
             </div>
-
             <article class="bg-white p-2 rounded-lg overflow-hidden">
+<<<<<<< Updated upstream
                 <div id="notification-button"><img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer"></div>
+=======
+                <div id="notification-button">
+                    <img src="{{ asset('assets/notification.png') }}" alt="Notification Image" class="w-5 cursor-pointer ">
+                </div>
+>>>>>>> Stashed changes
             </article>
         </article>
 
-        <article class="w-full flex items-center justify-between bg-[#0d99ff] text-white p-2">
+    <!-- Second Header -->
+    <article class="w-full fixed top-[50px] left-0 z-40 bg-blue-700  text-white">
+        <article class="flex items-center justify-between p-2">
             <a href="/super-admin/dashboard/accounts/create-account" class="normal-button py-1 font-medium flex items-center gap-2 justify-center">
                 Create Account 
                 <span class="text-lg font-bold">+</span>
             </a>
 
-            <article >
+            <article>
                 <form action="{{ route('account-dashboard') }}" method="GET" class="relative p-2 w-fit">
                     <img src="{{ asset('assets/search.png') }}" alt="Search Logo" class="w-3 absolute right-5 top-4">
                     <input type="text" class="search-box w-80 text-black font-medium" placeholder="Search person..." name="search_person">
                 </form>
             </article>
-
+         <a href="/super-admin/dashboard/accounts/create-account" class="normal-button py-1 font-medium flex items-center gap-5 justify-center">
+                Create Account 
+                <span class="text-lg font-bold">+</span>
+            </a>
             <form action="{{ route('account-dashboard') }}" method="GET">
                 <select name="sort_by" class="normal-button cursor-pointer" onchange="this.form.submit()">
                     <option selected disabled>-- Sort By --</option>
@@ -35,6 +47,7 @@
             </form>
         </article>
     </header>
+
 
     <article class="flex items-center justify-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%] z-10 hidden" id="notification-modal">
         <main class="w-1/2 bg-[#e4ccff]">
@@ -60,8 +73,14 @@
             </section>
         </main>
     </article>
+<<<<<<< Updated upstream
 
     <section class="px-10 py-5 flex flex-col gap-3">
+=======
+    
+    <article class = "p-10">
+    <section class="px-10 py-5 flex flex-col gap-3 pt-30" >
+>>>>>>> Stashed changes
         @if ($errors->any())
             <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
                 <ul>
@@ -74,6 +93,7 @@
         @if (session('message'))
             <h1 class="text-sm font-medium w-full px-5 bg-green-500 py-3 text-white rounded-lg my-2">{{ session('message') }}</h1>
         @endif
+<<<<<<< Updated upstream
 
         @if ($accounts->isEmpty())
             <h1 class="bg-red-400 w-full p-3 rounded-lg text-sm font-medium tracking-wide">No record found</h1>
@@ -89,6 +109,23 @@
                     </tr>
                 </thead>
                 <tbody>
+=======
+        </article>
+        <table class="border-collapse border border-gray-400 rounded-lg w-full">
+            <thead>
+                <tr>
+                    <th class="text-sm font-bold">ID</th>
+                    <th class="text-sm font-bold">Account Name</th>
+                    <th class="text-sm font-bold">Roles</th>
+                    <th class="text-sm font-bold">Assigned Brgy</th>
+                    <th class="text-sm font-bold">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if ($accounts->isEmpty())
+                    <h1 class="bg-red-400 w-full p-3 rounded-lg text-sm font-medium tracking-wide">No record found</h1>
+                @else
+>>>>>>> Stashed changes
                     @foreach ($accounts as $account)
                         <tr>
                             <td class="text-center">{{ $account->id }}</td>

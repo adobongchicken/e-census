@@ -12,11 +12,18 @@
     <title>Edit PWD Information</title>
 </head>
 
-<body class="flex items-center justify-center py-10">
-    <form action="/super-admin/dashboard/edit-pwd/{{ $person->id }}/update" method="POST" class="w-[60%]" enctype="multipart/form-data">
+<body class="flex items-center justify-center py-10 bg-gray-100">
+    <form action="/super-admin/dashboard/edit-pwd/{{ $person->id }}/update" method="POST" class="w-[60%] bg-white rounded-lg shadow-lg p-6" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <header class="flex items-center bg-blue-700 p-2 rounded-md mb-5">
+
+        <article class="relative bg-white p-2 rounded-lg">
+    <a href="javascript:history.back()" class="flex items-center">
+        <img src="{{ asset('assets/left.png') }}" alt="Back Image" class="w-5">
+        <span class="ml-2 text-gray-800"></span>
+    </a>
+</article>
             <div class="flex items-center gap-2">
                 <img src="{{ asset('assets/logo.png') }}" alt="Logo Image" class="w-16">
             </div>

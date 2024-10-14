@@ -1,7 +1,12 @@
 <x-dashboard-layout>
     <x-slot:title>Birthday Cash Gift</x-slot:title>
+<<<<<<< Updated upstream
    <header class="w-full sticky top-0 left-0 z-10">
         <article class="w-full bg-blue-700 flex items-center justify-between px-2 pr-10 p-3">
+=======
+    <header class="w-full fixed top-0 left-0 z-10">
+        <article class="w-full bg-red-600 flex items-center justify-between px-2 pr-10 p-3">
+>>>>>>> Stashed changes
             <div class="flex items-center justify-center flex-1">
                 <h1 class="text-white text-xl">Birthday Cash Gifts</h1>
             </div>

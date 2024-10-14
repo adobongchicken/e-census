@@ -58,8 +58,13 @@
                 </ul>
             </div>
         @endif
+<<<<<<< Updated upstream
 
         <button type="submit" class="primary-button">Add</button>
+=======
+        <button class="primary-button bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition">Add</button>
+        </form>
+>>>>>>> Stashed changes
     </form>
 </body>
 

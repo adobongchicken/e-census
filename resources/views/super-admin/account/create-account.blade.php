@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,21 +11,22 @@
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
     <title>Create Account</title>
 </head>
-<body class="flex items-center justify-center py-10">
-    
-    <form action="/super-admin/dashboard/accounts/create-account/create" method="POST" class="w-1/2 flex flex-col gap-4">
+
+<body class="h-full flex items-center justify-center">
+
+ <form action="/super-admin/dashboard/accounts/create-account/create" method="POST" class="w-1/2 flex flex-col gap-9 bg-white shadow-md">
         @if ($errors->any())
-            <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
         @csrf
-        <header class="flex items-center justify-start bg-red-600 px-5 rounded-lg py-2 gap-3">
-            <article class="relative bg-white p-2 rounded-lg">
+        <header class="flex items-center bg-red-600 p-3 rounded-md gap-x-4">
+        <article class="relative bg-white p-2 rounded-lg">
                 <a href="/super-admin/dashboard/accounts"><img src="{{ asset('assets/left.png')}} " alt="Back Image" class="w-6"></a>
             </article>
             <img src="{{ asset('assets/logo.png')}}" alt="Logo Image" class="w-16">
@@ -45,22 +47,22 @@
             <h1 class="font-bold text-lg">Personal Information</h1>
             <article class="flex items-center justify-between w-full ">
                 <label class="w-1/2 text-sm font-medium pl-10">Full Name *</label>
-                <x-input-box type="text" name="full_name" value="{{ old('full_name')}}"/>
+                <x-input-box type="text" name="full_name" value="{{ old('full_name')}}" />
             </article>
 
             <article class="flex items-center justify-between w-full ">
                 <label class="w-1/2 text-sm font-medium pl-10">Email Address *</label>
-                <x-input-box type="email" name="email" value="{{ old('email')}}"/>
+                <x-input-box type="email" name="email" value="{{ old('email')}}" />
             </article>
 
             <article class="flex items-center justify-between w-full ">
                 <label class="w-1/2 text-sm font-medium pl-10">Contact Number *</label>
-                <x-input-box type="text" name="contact_no" value="{{ old('contact_no')}}"/>
+                <x-input-box type="text" name="contact_no" value="{{ old('contact_no')}}" />
             </article>
 
             <article class="flex items-center justify-between w-full ">
                 <label class="w-1/2 text-sm font-medium pl-10">Contact Address *</label>
-                <x-input-box type="text" name="contact_address" value="{{ old('contact_address')}}"/>
+                <x-input-box type="text" name="contact_address" value="{{ old('contact_address')}}" />
             </article>
         </section>
 
@@ -73,7 +75,7 @@
 
             <article class="flex items-center justify-between w-full ">
                 <label class="w-1/2 text-sm font-medium pl-10">Password *</label>
-                <x-input-box type="password" name="password" value="{{ old('password')}}"/>
+                <x-input-box type="password" name="password" value="{{ old('password')}}" />
             </article>
 
             <article class="flex items-center justify-between w-full ">
@@ -88,7 +90,7 @@
                 <select name="baranggay_id" class="bg-red-600 text-white text-sm p-2 rounded-md cursor-pointer">
                     <option value="" selected>-- Assign Barangay --</option>
                     @foreach ($baranggay as $brgy)
-                        <option value="{{ $brgy->id }}">{{ $brgy->baranggay_name }}</option>
+                    <option value="{{ $brgy->id }}">{{ $brgy->baranggay_name }}</option>
                     @endforeach
                 </select>
             </article>
@@ -96,4 +98,5 @@
         <button class="primary-button">Create</button>
     </form>
 </body>
+
 </html>
