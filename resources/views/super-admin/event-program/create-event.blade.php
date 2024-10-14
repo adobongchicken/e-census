@@ -12,195 +12,211 @@
     <title>Create Event</title>
 </head>
 
-<body class="h-full flex items-center justify-center">
-<form action="/super-admin/dashboard/events-programs/create-event/store" method="POST" class="w-1/2 flex flex-col gap-9 bg-white shadow-md" enctype="multipart/form-data">
-    @csrf
-
-    @if ($errors->any())
-        <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <header class="flex items-center bg-red-600 p-3 rounded-md gap-x-4">
+<body>
+    <header class="w-full bg-red-700 p-4 flex items-center gap-3">
         <article class="relative bg-white p-2 rounded-lg">
-            <a href="/super-admin/dashboard/events-programs">
-                <img src="{{ asset('assets/left.png') }}" alt="Back Image" class="w-5">
-            </a>
+            <a href="/super-admin/dashboard/events-programs"><img src="{{ asset('assets/left.png')}} " alt="Back Image" class="w-5"></a>
         </article>
-
-        <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="w-10">
-        <h1 class="text-white">Add New Event</h1>
+        <article>
+            <img src="{{ asset('assets/logo.png') }}" alt="Logo Image" class="w-16">
+        </article>
+        <h1 class="text-center text-white text-xl font-medium w-full">Add Program</h1>
     </header>
-    @if (session('message'))
-        <div class="fixed top-5 right-5 z-50 w-1/4 bg-green-500 text-white p-3 rounded-lg text-sm shadow-lg">
-            {{ session('message') }}
-        </div>
+    @if (session('success'))
+        <h1>{{ session('success') }}</h1>
     @endif
-        <section class="flex flex-col gap-10 program-form bg-white-100 shadow-md p-6 rounded-lg max-w-2xl">
-    <article class="flex flex-col items-center">
-        <img alt="Uploaded Image" class="w-96 h-96 rounded-xl hidden" id="preload-image">
-
-        <div class="w-full">
-            <button id="uploadButton" type="button" class="primary-button bg-transparent border-blue-700 border-2 text-black">Upload Photo</button>
-        </div>
-        <input type="file" name="event_image" accept=".png, .jpeg, .jpg" hidden id="input_file"/>
-    </article>
-
-    <article class="flex items-center">
-        <label class="w-64 font-bold">Program Name</label>
-        <x-input-box class="input-box" type="text" name="program_name" value="{{ old('program_name') }}" />
-    </article>
-
-    <article class="flex items-center">
-        <label class="w-64 font-bold">Location</label>
-        <x-input-box class="input-box" type="text" name="location" value="{{ old('location') }}"/>
-    </article>
-
-    <article class="flex items-center">
-        <label class="w-64 font-bold">Venue</label>
-        <x-input-box class="input-box" type="text" name="venue" value="{{ old('venue') }}"/>
-    </article>
-
-    <article class="flex items-center w-full justify-between gap-x-5 ">
-        <div class="flex-1 flex items-center gap-x-3">
-            <label class=" font-bold">Date</label>
-            <x-input-box class="input-box" type="date" name="date" value="{{ old('date') }}"/>
-        </div>
-
-        <div class="flex-1 flex items-center gap-x-3">
-            <label class=" font-bold">Time</label>
-            <x-input-box class="input-box" type="time" name="time" value="{{ old('time') }}"/>
-        </div>
-
-        <div class="flex-1 flex items-center gap-x-3">
-            <label class=" font-bold">Duration</label>
-            <x-input-box class="input-box" type="number" name="duration" placeholder="By hour/s" value="{{ old('duration') }}"/>
-        </div>
-    </article>
-
-    <article class="flex items-start flex-col gap-2">
-        <label class="w-64 font-bold">Description</label>
-        <textarea name="description" cols="30" rows="10" class="input-box border-red-700">{{ old('description') }}</textarea>
-    </article>
-
-    <article class="flex items-start flex-col gap-2">
-        <label class="w-64 font-bold">Residency Requirements</label>
-        <textarea name="residency_requirements" cols="30" rows="10" class="input-box border-red-700">{{ old('residency_requirements') }}</textarea>
-    </article>
-
-    <h1 class="font-bold">Disability Type</h1>
-
-    <section class="flex items-center justify-start w-full">
-        <article class="flex flex-col gap-2 items-start justify-start w-[40%]">
-            <h1 class="font-bold text-sm">Visual Impairment</h1>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="visual_impairment[]" value="Blindness">
-                <label class="text-sm font-medium">Blindness</label>
+    <form method="POST" action="/super-admin/dashboard/events-programs/create-event/store" class="p-5 px-32" enctype="multipart/form-data">
+        @csrf
+        @if ($errors->any())
+            <div class="bg-red-100 text-red-500 p-4 mb-4 rounded-md">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="visual_impairment[]" value="Low Vision">
-                <label class="text-sm font-medium">Low Vision</label>
-            </div>
-        </article>
+        @endif
 
-        <article class="flex flex-col gap-2 w-[35%] items-start justify-start">
-            <h1 class="font-bold text-sm">Speech/Language Impairment</h1>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="speech_language_impairment[]" value="Difficulty Speaking">
-                <label class="text-xs font-medium">Difficulty Speaking (Stuttering, Dysarthria)</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="speech_language_impairment[]" value="Non-verbal">
-                <label class="text-sm font-medium">Non-verbal</label>
-            </div>
-        </article>
-    </section>
-
-    <section class="flex items-center justify-start w-full">
-        <article class="flex flex-col gap-2 w-[40%]">
-            <h1 class="font-bold text-sm">Hearing Impairment</h1>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="hearing_impairment[]" value="Blindness">
-                <label class="text-sm font-medium">Blindness</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="hearing_impairment[]" value="Low Vision">
-                <label class="text-sm font-medium">Low Vision</label>
-            </div>
-        </article>
-
-        <article class="flex flex-col gap-2 w-[35%]">
-            <h1 class="font-bold text-sm">Intellectual Disabilities</h1>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="intellectual_disabilities[]" value="Down Syndrome">
-                <label class="text-sm font-medium">Down Syndrome</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="intellectual_disabilities[]" value="Development Delay">
-                <label class="text-sm font-medium">Development Delay</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="intellectual_disabilities[]" value="Autism Spectrum Disorder">
-                <label class="text-sm font-medium">Autism Spectrum Disorder</label>
-            </div>
-        </article>
-
-        <article class="flex flex-col gap-2">
-            <h1 class="font-bold text-sm">Learning Disabilities</h1>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="learning_disabilities[]" value="Dyslexia">
-                <label class="text-sm font-medium">Dyslexia</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="learning_disabilities[]" value="ADHD">
-                <label class="text-sm font-medium">ADHD</label>
-            </div>
-        </article>
-    </section>
-
-    <section class="flex items-center justify-start w-full">
-        <article class="flex flex-col gap-2 w-[40%]">
-            <h1 class="font-bold text-sm">Mobility Impairment</h1>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="mobility_impairment[]" value="Paraplegia">
-                <label class="text-sm font-medium">Paraplegia</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="mobility_impairment[]" value="Quadriplegia">
-                <label class="text-sm font-medium">Quadriplegia</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="mobility_impairment[]" value="Amputation">
-                <label class="text-sm font-medium">Amputation</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="mobility_impairment[]" value="Musculoskeletal Disabilities">
-                <label class="text-sm font-medium text-wrap w-1/2">Musculoskeletal Disabilities</label>
-            </div>                    
-        </article>
-
-        <article class="flex flex-col gap-2 w-[35%]">
-            <h1 class="font-bold text-sm">Psycho Social Disabilities</h1>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="psycho_social_disabilities[]" value="Depression">
-                <label class="text-sm font-medium">Depression</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="psycho_social_disabilities[]" value="Bipolar Disorder">
-                <label class="text-sm font-medium">Bipolar Disorder</label>
-            </div>
-            <div class="flex items-center gap-1">
-                <input type="checkbox" name="psycho_social_disabilities[]" value="Anxiety Disorders">
-                <label class="text-sm font-medium">Anxiety Disorders</label>
-            </div>
-        </article>
+        @if (session('message'))
+            <h1 class="w-full bg-green-500 text-white p-3 mb-5 rounded-lg text-sm">{{ session('message') }}</h1>
+        @endif
+        <section class="flex flex-col gap-10 program-form">
+            <article class="flex flex-col items-center">
+                <img alt="Uploaded Image" class="w-96 h-96 rounded-xl hidden" id="preload-image">
     
-        <article class="flex flex-col gap-2">
+                <div class="w-full">
+                    <button id="uploadButton" type="button" class="primary-button bg-transparent border-blue-700 border-2 text-black">Upload Photo</button>
+                </div>
+                <input type="file" name="event_image" accept=".png, .jpeg, .jpg" hidden id="input_file"/>
+            </article>
+    
+            <article class="flex items-center">
+                <label class="w-64 font-bold">Program Name</label>
+                <x-input-box class="input-box" type="text" name="program_name" value="{{ old('program_name') }}" />
+            </article>
+
+            <article class="flex items-center">
+                <label class="w-64 font-bold">Location</label>
+                <x-input-box class="input-box" type="text" name="location" value="{{ old('location') }}"/>
+            </article>
+            
+            <article class="flex items-center">
+                <label class="w-64 font-bold">Venue</label>
+                <x-input-box class="input-box" type="text" name="venue" value="{{ old('venue') }}"/>
+            </article>
+    
+            <article class="flex items-center w-full justify-between gap-x-5 ">
+                <div class="flex-1 flex items-center gap-x-3">
+                    <label class=" font-bold">Date</label>
+                    <x-input-box class="input-box" type="date" name="date" value="{{ old('date') }}"/>
+                </div>
+    
+                <div class="flex-1 flex items-center gap-x-3">
+                    <label class=" font-bold">Time</label>
+                    <x-input-box class="input-box" type="time" name="time" value="{{ old('time') }}"/>
+                </div>
+
+                <div class="flex-1 flex items-center gap-x-3">
+                    <label class=" font-bold">Duration</label>
+                    <x-input-box class="input-box" type="number" name="duration" placeholder="By hour/s" value="{{ old('duration') }}"/>
+                </div>
+            </article>
+    
+            <article class="flex items-start flex-col gap-2">
+                <label class="w-64 font-bold">Description</label>
+                <textarea name="description" cols="30" rows="10" class="input-box border-red-700">{{ old('description') }}</textarea>
+            </article>
+    
+            <article class="flex items-start flex-col gap-2">
+                <label class="w-64 font-bold">Residency Requirements</label>
+                <textarea name="residency_requirements" cols="30" rows="10" class="input-box border-red-700">{{ old('residency_requirements') }}</textarea>
+            </article>
+
+            <h1 class="font-bold">Disability Type</h1>
+
+            <section class="flex items-center justify-start w-full">
+
+                <article class="flex flex-col gap-2 items-start justify-start w-[40%]">
+                    <h1 class="font-bold text-sm">Visual Impairment</h1>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="visual_impairment[]" value="Blindness">
+                        <label class="text-sm font-medium">Blindness</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="visual_impairment[]" value="Low Vision">
+                        <label class="text-sm font-medium">Low Vision</label>
+                    </div>
+                </article>
+
+                <article class="flex flex-col gap-2 w-[35%] items-start justify-start">
+                    <h1 class="font-bold text-sm">Speech/Language Impairment</h1>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="speech_language_impairment[]" value="Difficulty Speaking">
+                        <label class="text-xs font-medium">Difficulty Speaking (Stuttering, Dysarthria)</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="speech_language_impairment[]" value="Non-verbal">
+                        <label class="text-sm font-medium">Non-verbal</label>
+                    </div>
+                </article>
+
+                <article class="flex flex-col gap-2 items-start justify-start">
+                    <h1 class="font-bold text-sm">Learning Disabilities</h1>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="learning_disabilities[]" value="Dyslexia">
+                        <label class="text-sm font-medium">Dyslexia</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="learning_disabilities[]" value="ADHD">
+                        <label class="text-sm font-medium">ADHD</label>
+                    </div>
+                </article>
+            </section>
+
+            <section class="flex items-center justify-start w-full">
+                <article class="flex flex-col gap-2 w-[40%]">
+                    <h1 class="font-bold text-sm">Hearing Impairment</h1>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="hearing_impairment[]" value="Blindness">
+                        <label class="text-sm font-medium">Blindness</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="hearing_impairment[]" value="Low Vision">
+                        <label class="text-sm font-medium">Low Vision</label>
+                    </div>
+                </article>
+
+                <article class="flex flex-col gap-2 w-[35%]">
+                    <h1 class="font-bold text-sm">Intellectual Disabilities</h1>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="intellectual_disabilities[]" value="Down Syndrome">
+                        <label class="text-sm font-medium">Down Syndrome</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="intellectual_disabilities[]" value="Development Delay">
+                        <label class="text-sm font-medium">Development Delay</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="intellectual_disabilities[]" value="Autism Spectrum Disorder">
+                        <label class="text-sm font-medium">Autism Spectrum Disorder</label>
+                    </div>
+                </article>
+
+                <article class="flex flex-col gap-2">
+                    <h1 class="font-bold text-sm">Learning Disabilities</h1>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="learning_disabilities[]" value="Dyslexia">
+                        <label class="text-sm font-medium">Dyslexia</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="learning_disabilities[]" value="ADHD">
+                        <label class="text-sm font-medium">ADHD</label>
+                    </div>
+                </article>
+            </section>
+
+            <section class="flex items-center justify-start w-full">
+                <article class="flex flex-col gap-2 w-[40%]">
+                    <h1 class="font-bold text-sm">Mobility Impairment</h1>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="mobility_impairment[]" value="Paraplegia">
+                        <label class="text-sm font-medium">Paraplegia</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="mobility_impairment[]" value="Quadriplegia">
+                        <label class="text-sm font-medium">Quadriplegia</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="mobility_impairment[]" value="Amputation">
+                        <label class="text-sm font-medium">Amputation</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="mobility_impairment[]" value="Musculoskeletal Disabilities">
+                        <label class="text-sm font-medium text-wrap w-1/2">Musculoskeletal Disabilities</label>
+                    </div>                    
+                </article>
+
+                <article class="flex flex-col gap-2 w-[35%]">
+                    <h1 class="font-bold text-sm">Psycho Social Disabilities</h1>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="psycho_social_disabilities[]" value="Depression">
+                        <label class="text-sm font-medium">Depression</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="psycho_social_disabilities[]" value="Anxiety Disorder">
+                        <label class="text-sm font-medium">Anxiety Disorder</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="psycho_social_disabilities[]" value="Schizophrenia">
+                        <label class="text-sm font-medium">Schizophrenia</label>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" name="psycho_social_disabilities[]" value="Bipolar Disorder">
+                        <label class="text-sm font-medium">Bipolar Disorder</label>
+                    </div>
+                </article>
+
+                <article class="flex flex-col gap-2">
                     <h1 class="font-bold text-sm">Multiple Disabilities (different categories)</h1>
                     <div class="flex items-center gap-1">
                         <label class="text-sm font-medium">Specify: </label>
@@ -215,12 +231,12 @@
                         <label class="text-sm font-medium">Specify: </label>
                         <input type="text" name="other_disabilities[]" class="border-b border-black outline-none text-xs p-1">
                     </div>
-                    </article>
+                </article>
             </section>
-            <button class="primary-button" type="button" id="next">Next</button>
+            <button class="primary-button bg-red-700 self-center w-64" type="button" id="next">Next</button>
         </section>
 
-            <section class="flex flex-col gap-20 organizer-form hidden">
+        <section class="flex flex-col gap-10 organizer-form hidden">
             <article class="flex items-start flex-col gap-3">
                 <label class="font-bold text-sm uppercase">Organizer's Name</label>
                 <x-input-box class="input-box" type="text" name="organizer_name" value="{{ old('organizer_name') }}"/>
@@ -283,7 +299,7 @@
                     </div>
                 </aside>
             </article>
-            <button class="primary-button">Save</button>
+            <button class="primary-button bg-red-700 w-64 self-center">Save</button>
         </section>
     </form>
     <script>
